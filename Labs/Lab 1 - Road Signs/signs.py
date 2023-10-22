@@ -1,4 +1,3 @@
-
 """
 Use python turtle graphics to print out two road signs, one of which has to include an intersection sign.
 file: signs.py
