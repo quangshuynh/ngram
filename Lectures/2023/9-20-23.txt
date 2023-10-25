@@ -1,0 +1,16 @@
+- A continue statement inside a loop skips all remaining statements in the loop and goes back to the enclosing while loop statement
+
+1. def draw_squares_iter(sides):
+		sides = 4
+		while sides > 0:
+			turtle.forward(100)
+			turtle.left(90)
+			sides = side - 1
+
+
+- Perform a substitution trace for bunnies pop rec(10, 3): 
+ bunnies_pop_rec(10, 3) = bunnies_pop_rec(50, 2)
+= bunnies_pop_rec(250, 1)
+= bunnies_pop_rec(1250, 0)
+= 1250
+		
