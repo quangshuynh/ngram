@@ -1,1 +1,71 @@
+Quiz due 11:59pm 8/28/23
+Password: PythonPycharm
+
+**Mentoring** 
+	Sundays - Thursdays 9am-10pm
+	Fridays - Saturdays 9am-6pm
+
+**CS141 meets three times each week**
+	- Lecture
+	- Lab
+	- Recitation
+
+**Grading**
+	***Assignments: 55%***
+		Participation: 5%
+		Labs: 25%
+		Projects: 10%
+		Recitation: 15%
+	***Tests:*** 
+		First midterm exam: 10%
+		Practical exam: 5%
+		Second midterm exam: 15%
+		Final exam: 15%
+	***Policies:***
+		*Points are lost if late or leave early*
+		The final grade may not be more than 10% higher than the lower of the two
+		
+
+**Assignments**
+	Work will be submitted on the *MyCourses* tab
+	Must be submitted before the deadline
+	
+***Labs:***
+	Labs will always be due next Tuesday
+
+
+***Turtle***:
+	Turtle responds to commands
+	**turtle.up()** and ***turtle.down()*** will make the pen go up or down
+	**turtle.left(90)** will make the turtle go left
+	**turtle.forward(100)** will make the turtle go the direction it will facing
+	**turtle.home()** will make the turtle go to its origin
+	**turtle.setheading(0)** can be used to rotate the turtle to a specific angle ()
+	**turtle.circle(10)** tells the turtle to draw a circle to its left
+	**turtle.pencolor('red')** will turn the line red
+	**turtle.write('text')** types words
+
+
+***Turtle Initialization algorithm***
+	- Move turtle to home position  
+	- Rotate turtle north  
+	- Lift pen up
+
+***Drawing a filled yellow circle*
+	*turtle.fillcolor('yellow')
+	turtle.begin_fill()
+	turtle.circle(150)
+	turtle.end_fill()*
+Drawing a smiley face steps
+	- Initialize Turtle  
+	- Draw Border  
+	- Draw Mouth  
+	- Draw Nose  
+	- Draw Eyes
+
+***Python basics***
+	A hash (#) are used for a single-lined comment
+	Triple single quotes (''') are used for a multi-lined comment
+	MUST follow style standards or points will be deducted 
+		(https://www.cs.rit.edu/~csci141/Docs/PythonRecommendations.txt)
 
