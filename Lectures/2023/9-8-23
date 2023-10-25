@@ -1,0 +1,19 @@
+CS141 Recitation Quiz 2
+
+1. What Python type are in each of the following four variables?
+	a. name = 'Abe'
+		String
+	b. age = 20
+		Integer
+	c. can.vote = True
+		Boolean
+	d. party = None
+		NoneType
+
+2. What do these expressions evaluate to?
+	a. False
+	b. True
+	c. False
+	d. True
+
+3. Wha
