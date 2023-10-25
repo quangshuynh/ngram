@@ -1,1 +1,98 @@
+- Variable
+	- An identifier that is a shortcut for an address in memory
+	- A variable is *declared* when it is first given a name in the program
+	- A variable is *initialized* when assigned a value
+	- Can be declared and initialized at the same time
+		- Using format *identifer = value*
+		- Ex. name = "Quang"
+			- name = "Quang"
+			- print(name)
+	- A variable can only start with letters or underscore
+	- Once a variable is stored, it can be called again
 
+- Literal values
+	- Values that is typed directly into the code
+	- Tells the program to literally use this value here
+		- Literal string
+		- Ex. print("Hello World")
+
+- Python strings
+	- A sequence of characters is called a string
+	- Strings are enclosed in quotes
+	- Ex. 'This is a string'
+	- Ex. "This is also a string "
+- ![[String escape sequences.png]]
+
+- Statements and expressions
+	- Statements is an instruction to the computer to perform the same action
+		- Statements cannot produce values
+		- Cannot be used as function arguments
+		- Can only be declared
+	- Expressions is a snippet of code results in a single value when evaluated by the computer
+	- Expressions can produce values
+	- Can be passed into functions
+
+- Expression
+	- Ex. 12
+	- Ex. 4 + 7
+	- Ex. age = 5 + 12 + 1
+![[Expressions and assignment.png]]
+
+- Scope
+	- The scope of a variable refers to the parts of the program in which the variable can be used
+	- The scope of a global variable is the entire program
+		- Can be used sparingly
+	- The scope of a local variable is from the line from which it is declared until the end of the function
+
+- Stack frames
+	- Keeps track of variables in scope
+
+- Call stack
+	- Each time one function calls another, a new stack frame is added to memory
+	- When a function finishes executing, its stack frame is removed from the Call Stack
+	- The information in the next stack frame is used to determine which line of code to execute next and which variables are in the scope
+
+- Standard output and print() function
+	- The print() function in Python sends a string to a standard output
+	- Ex. print("Some text") prints Some text
+	- Output is data that originates inside of a program that sends a string of text output to a standard output
+	- Input is data that originates outside of a program and is read into the program
+	- Ex. input("What is your age? ")
+	- input() always returns whatever the user types as a Python string
+
+- Boolean values
+	- Values that result from evaluating a Boolean expression are
+		- True
+		- False
+	- A Boolean expression is an expression that when evaluated, results in True or False
+
+- Decisions
+	- Conditional statements
+		- If a condition (boolean expression), is True, do something
+		- Otherwise, do nothing
+	- If, elif, else
+	- Conditional statements can be chained
+		- If a condition is true, do something
+		- If some other condition is true, do something else
+		- If none of the conditions are true, do something else by default
+		- ![[Conditional statements.png]]
+
+- Python functions
+	- A function is a block of related statements
+	- Functions must be declared using "def keyword"
+	- Arguments are positional, which means each argument is in the same position as its parameter in the list.
+	- Parameters are specified as a comma-separated list between the parentheses in the function declaration.
+
+- Type hints
+	- Type hints may return information about:
+		- Expected type of each argument
+		- Type of return value
+- ![[Type hints.png]]
+
+- Fruitful functions
+	- The return keyword is used in a function to return a value so it can be used outside of the function
+	- The value is sent back to the caller where it can be used
+
+- None
+	- None is a special value in Python that means "No value"
+	- All functions always return a value of some kind
