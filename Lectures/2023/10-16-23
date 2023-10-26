@@ -1,0 +1,106 @@
+tWeek 8 password: MergeSortQuick
+- Insertion sort
+	- Looping over a list performing insertion of one element at a time (shifting the element)
+		- Shifting has an expected time complexity of O(n)
+	- The shift is performed once per element
+		- Time complexity of n * O(n) or O(n^2)
+
+- Divide and Conquer algorithms
+	- Series that can sort and work more efficiently
+		- Breaking the list into parts (normally 2)
+		- Sorting the parts
+		- Putting the parts back together
+		
+
+- Merge Sort Algorithm
+	- Divide and conquer algorithm
+	- Splitting the list in half
+	- Splits are merged back in sorted order
+	- Uses slicing to create copies of the elements from the original list
+	- Split until all the lists are size 1
+	- Two lists are merged back and then sorted
+	- Lists are put back sorted
+		- ![[merge sort.png]]
+	- Merge sorting example
+		- ![[merge sort example.png]]
+
+- Split
+	- Split step in the merge sort will split the original list into left and right halves and return both lists
+	- Need to return multiple variables, separating each variable by comma
+	- It is possible to return multiple variables 
+		- The values are implicitly packed into a tuple
+	- When calling the function
+		- The values are unpacked from the tuple
+		- ![[split calling multiple variables.png]]
+
+- Merge
+	- Divides the list in half
+	- Checks if the first index in the left is less than the first index in the right
+	- Append() function takes a value and moves it to the end of an existing list
+	- Appends smallest value to list
+	- Checks if second index in the left is less than the first index in the right
+		- ![[merge code.png]]
+
+- Merge sorting odd lists
+	- ![[odd list merge sort.png]]
+
+
+- Merge Sort Complexity
+	- Merge sort complexity: O(nlog₂n)
+		- Divide: Finding the middle (O(1)) then copy array into subarrays (O(1)) until we reach subarrays of size 1. (O(log₂n)): O(1) * O(log₂n)
+	- Conquer (sorting and merging): O(n) * O(log₂n)
+		- Sort each pair of subarrays: O(n)
+		- Merge into one array: O(log₂n)
+	- Total complexity:
+	  - Divide + Conquer:
+	  - O(1) * O(log₂n) + O(n) * O(log₂n) = O(n) * O(log₂n) = O(nlog₂n)
+
+- A different fast sort
+	- Quick sort  
+		- Another divide and conquer algorithm
+		- Pick an element from the list and choose a pivot point
+			- The pivot point is always index 0 in the list
+		- Divide the list into 3 partitions
+		- The resulting partitions contains:
+			- List of elements less than the pivot (smaller list)
+			- List of elements equal to the pivot (equal list)
+			- List of elements more than the pivot (bigger list)
+		- Conquer by sorting the smaller lists and merging them back together in sorted order
+		- ![[quick sort.png]]
+		- Quick sort diagram
+		  - ![[quicksort example.png]]
+		- Quicksort example
+			- ![[quicksort.png]]
+
+- Quicksort complexity
+	- Best case: O(nlogn)
+	- Average case: O(nlogn)
+	- Worst case: O(2**n)
+	- Two main steps:
+		- Partition 
+			- Complexity of partition: O(n)
+		- Merge
+			- Complexity of merge: O(n)
+	- The complexity depends on where the pivot point is
+		- If the pivot point in the middle of the list, that is the best case
+		- If the pivot point is greater than or less than the rest of the data, that is the worst case
+
+- Pivot selection
+	- Index 0 is arbitrarily chosen as the pivot
+	- Other pivots can be chosen too
+		- Last index
+			- len(a_list) - 1
+		- Middle index
+			- len(a_list) // 2
+		- Random index
+			- randrange(len(a_list))
+
+- Complexity money slide
+	- ![[complexity38379709.png]]
+
+- In Place sorting
+	- Moves elements around inside of the array
+	- Python's built-in sorting function sorted()
+		- sorted() uses Timsort
+			- Timsort combines Merge Sort and Insertion Sort
+	- ![[sorted().png]]
