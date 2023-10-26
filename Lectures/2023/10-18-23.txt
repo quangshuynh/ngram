@@ -1,0 +1,60 @@
+- Merge sort
+	- Divide and conquer algorithm
+	- Repeatedly split the data into smaller unsorted lists in half
+	- Repeatedly merge those lists back in sorted fashion
+		
+		- Can be implemented two ways in respect to storage
+			- In-place with single list using indices and swapping
+				- Most efficient with respect to storage space
+				- Harder to trace the code
+			- Out-of-place where new lists are created with each split and merg
+				- Less efficient with respect to storage space
+				- Easier to follow the code
+	- ![[merge sort7927709.png]]
+		
+	- Splitting the data
+		- ![[merge sort split.png]]
+		
+	- Merging the data
+		- ![[merge sort merging.png]]
+	
+	- Putting it all together with the top level recursive client function
+		- ![[merge sort putting it togethe.png]]
+	
+	- Merge sort complexity
+		- ![[merge sort complexity.png]]
+
+- Quick sort
+	- Divide and conquer algorithm
+	- Choose a pivot as first element
+	- Partition the data into three separate lists
+		- Less, equal to pivot, and more
+	- Repeatedly sort the less and greater lists and recombine them using concatenation with the equal lists
+	
+	- Can be implemented as in-place or out-of-place
+	
+	- Quick sort visualization
+		- ![[quick sort visualization.png]]
+		
+	- Partition the data into three separate ones
+		- ![[quick sort partition.png]]
+	
+	- Putting it all together with the top level recursive client function
+		- ![[quick sort putting it all together.png]]
+	
+	- Quick sort complexity
+		- Average case
+			- ![[quick sort average case.png]]
+		- Worst case
+			- ![[quick sort worse case.png]]
+
+- Big-O: Fastest to slowest
+	- ![[big o fastest to slowest.png]]
+
+
+- Quiz
+	1. O(N^2)
+	2. O(N^2)
+	3. a. Quick sort, b. Merge sort. c. Insertion sort
+	4. Best: O(nlogn), Average: O(nlogn), Worst: O(nlogn)
+	5. C, E, A, B, D
