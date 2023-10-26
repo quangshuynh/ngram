@@ -1,0 +1,114 @@
+- Weekly password: SetDictDataclass
+- 
+- Overview:
+	- Sets
+	- Dictionaries
+	- User-defined data
+	- Structure (Data classes)
+
+- Sets
+	- A data structure that makes sure all of the elements it contains are unique 
+		- Can be created in two ways
+			- a_set = {3, 2, 1}
+			- built in set function 
+				- b_set = set("abcdcba")
+	- Elements are added using the add() function on the set, a_set.add(5)
+		- add() function removes any duplicates
+	- Sets do not guarantee that elements remain in order
+	- Sets are unsorted
+	- Sets do not support indexes to retrieve elements
+	- The "in" keyword can be used to check if a value is in a set
+
+	- Sequences:
+		- *Strings* are sequences of characters.  
+		- *Ranges* are sequences of integers.  
+		- *Records* are sequences of fields in a CSV file.  
+		- *Arrays* are sequences of any type.  
+		- *Tuples* are immutable arrays.  
+		- *Lists* are arrays that dynamically resize as elements are added and removed
+	- Sets can be used in for-loops
+	- Unlike other sequences, sets do not maintain elements in a specific order
+
+	- A hash function is a one-way function that produces a number as output
+		- A one-way function is one that works in one direction
+			- When given an input, it produces an output
+			- When given an output, it cannot originate the input
+	- Hash functions produces a numeric value called hash code as an output
+	- Python sets are hashing data structures
+		- Uses hash function to convert the values it stores into hash code
+	
+	- Set complexities
+		- A Python set does not need to search its array
+		- Accessing an array is constant time
+		- Adding n elements is O(c) * n or O(n)
+		- Sets can maintain a collection of unique elements with very good performance
+		- The performance of the set depends on the hashing function used
+	
+	- Set theory
+		- A field of math that deals exclusively with sets
+		- There are many axioms of set theory.  
+			-  ∅ is the null or empty set, and is the set containing no elements, i.e. ∅ = {}  
+			- A ∈ B indicates that A is an element or member of B, i.e. set B contains A.  
+			- A ⊂ B indicates that A is a subset of B, i.e. set B contains all of the elements of set A.  
+			- A ⊃ B indicates that A is a superset of B, i.e. set A contains all of the elements of set B.  
+			-  A ∪ B is the union of sets A and B, and is a set that contains all of the elements of both A and B. Given sets A = {1, 2} and B = {2, 3}, then the union of A and B is {1, 2, 3}.  
+			-  A ⋂ B is the intersection of sets A and B, and is a set that contains only the elements that are in both A and B. Given sets A = {1, 2} and B = {2, 3}, then the intersection of A and B is {2}
+				- ![[set theory.png]]
+
+
+- Dictionaries
+	- A dictionary is like a list, but instead of numeric indexes, it uses keys
+	- As with a list index, a key can be used to retrieve a value from the dictionary
+	- Dictionaries are a collection of key:value pairs
+	- Keys do not need to be numbers
+	- Dictionaries are hashing data structures
+		- A hash function is used to convert the key info into an integer, which is used to find an index in an array
+			- ![[dictionaries.png]]
+	
+	- Once a key/value is stored in a dictionary, the key can be used to retrieve its value using square brackets
+	- Keys cannot be duplicates
+	- Values can be duplicates
+	- Dictionary keys are unique
+		- Old values are replaced with the new value
+			- ![[dictionary key value.png]]
+		
+	- Iterating over keys
+		- Dictionaries are sequences of keys
+		- Dictionaries cannot be sorted
+			- The built in sorted() function can be used to make a sorted list from the keys in a dictionary
+		- The keys() function can be used to get a sequence of keys from the dictionary
+			- ![[iterating over keys dictionary.png]]
+	
+	- Dictionary complexity
+		- O(c)
+			- ![[list set dictionary complexity.png]]
+
+- Complexities
+	- Every data structure has primary characteristics
+		- Arrays
+			-  Fixed length
+			- Provide fast access
+		- Lists
+			- Dynamically resize as elements are added or removed
+		- Sets
+			- Guarantee uniqueness
+		- Dictionaries
+			- Maintain collection of key:value pairs
+
+- Understanding the specific strengths and weaknesses of each different data structure.
+	- Does the order of the elements in the data structure matter?  
+	- Will I need to determine if an element is present in the data structure?  
+- Is uniqueness important?  
+- Will I need to insert values into the middle?  
+- Will I be appending to or removing from only the end?
+
+
+- Data classes
+	- A dataclass is a way to create an object for holding a set of related data
+	- Instance values are mutable
+	- Better for relating data than a tuple or list since the fields accessible by name
+	- Requires you to import:
+		- from dataclasses import dataclass
+		- ![[data class example1.png]]
+
+- 
