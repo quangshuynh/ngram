@@ -1,0 +1,144 @@
+Quiz password - ListTupleSearchSort
+
+- Sequences
+	- Strings are sequences of characters
+	- Integers are sequences of numbers
+	- len() function can be used to find the length of a sequence
+	- An index can be used to get a specific character from a sequence by slicing.
+
+- Lists
+	- Can hold values of any type
+	- Values are accessed using square brackets from 0 to length-1
+	- Lists are not immutable
+	- A dynamically sized and flexible array
+	- Values can be added to the end of a list
+		- Unlike arrays
+	- append() can be used to add new values to the end of a list
+	- ![[list1.png]]
+
+- Operations on Lists
+- Indexing
+	- list = ["physics", "chemistry", 1997, 2000]
+	- list[2] = [1997]
+	- list[0:2] = ["physics", "chemistry"]
+
+- In
+	- For loops
+		-  for (element) in (sequence)
+	-  It can also be used part of a Boolean expression
+		(element) in (sequence)
+
+- Concatenation
+	- a_string = "abc" + "def"
+	- The concatenation operator only works with other lists.
+
+- Popping and Inserting
+	- pop() will permanently remove and return the element at the specified index in the list
+	- insert() used to insert elements at any valid index
+	- ![[pop and insert 1.png]]
+
+- Extending (+=)
+	- The extend operator (+=) can be used to append a list onto another list
+	- ![[extend operator.png]]
+
+- Tokenizing sequences - split()
+	- split() splits strings into tokens based on a delimiter
+		- b_list = "AB C 2 F"
+		- tokens = b_list.split(" ")
+		- print(tokens[:]) 
+			- AB, C, 2, F
+	- ![[token and split.png]]
+
+- Tuples
+	- Similiar to arrays
+	- A fixed length
+	- Can hold values of any type
+	- Can be accessed by using indexes from 0 to length-1
+		- A tuple is immutable
+	- ![[tuples1.png]]
+
+- Value types vs. reference types
+	- Value types
+		- Int, float, bool
+		- When passed as an argument, a copy is made
+		- Passing by value
+	- Reference types
+		- Arrays, lists
+		- The original value is passed into the function
+		- Not a copy
+		- Passing by reference
+
+- Complexity
+	- How the performance of an algorithm changes as the size of the input changes
+	- Time complexity
+		- Number of operations the algorithm must perform. More operations = more time
+	- Space complexity
+		- How much memory the algorithm needs to use
+	- Expressed in Big-O notation
+	- Cheat sheet
+		- https://www.bigocheatsheet.com/
+
+- Time complexity definitions
+	- O(C), O(1) - Constant time
+		- The algorithm performs the same number of operations regardless of the size of N
+	- O(log N) - Logarithmic time
+		- The algorithm must perform log(N) operations. Time complexity increases very slowly as N increases
+	- O(N) - Linear time
+		- Algorithm must perform N operations. A linear increase with N
+	- O(N log N) 
+		- Algorithm performs N * log(N) operations. The time complexity increases more quickly than O(log N) but not as quickly as O(N^x)
+	- O(N^x) - Polynomial time
+		- Algorithm must perform N^x operations. The performance of the algorithm gets worse as N gets bigger
+
+- Linear time
+	- Number of operations needed increases at the same rate as the size of the input
+
+- List complexities
+	- Many functions operated by the list type operate in constant time
+	- Any operation that requires
+	- A copy runs in linear time
+	- ![[list complexities1.png]]
+
+
+- Searching
+	- A search algorithm determines whether or not a specific value is present in a data structure
+	
+	- Linear search
+		- Begins at index 0 and compares the value at each index to the target
+		- If one of the values matches the target, return the value
+	- Linear search can be implemented with a loop over the array
+	
+	- Binary search
+		- If the data is already sorted, binary search is better to use than linear search
+		- Looks at the element at the midpoint in an array. If the length of the array is odd, choose the element left of center
+		- Divide and conquer algorithm
+		- Divides the arrays into halves and eliminates one half with each recursive call
+
+- Complexity of binary search
+	- Maximum searches based on list size, N
+	- N = 4, max = 3
+	- N = 8, max  = 4
+	- N = 16, max = 5
+	- N = 32, max = 6
+
+- Log time
+	- Linear search = linear time
+	- Binary search = logarithmic time
+		- Doubling the size of the array will increase the operations required by one
+	- Binary search only works when the array is sorted
+		- If an array is unsorted, then linear search is the only option to find the target value
+
+- Search time complexity
+- ![[search time complexity.png]]
+
+
+- Sorts
+- Insertion sort
+	- Begins by dividing the array into two partitions
+		- A sorted partition and an unsorted partition
+		- Check if leftmost element in unsorted partition is moved to the rightmost position in sorted partition
+
+- Insertion sort complexity
+	- Best - O(n)
+	- Average - O(n^2)
+	- Worst - O(n^2)
