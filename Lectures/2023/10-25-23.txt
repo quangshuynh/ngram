@@ -1,0 +1,85 @@
+- Sets 
+	-  A set is an unordered collection with no duplicate elements
+	
+	- Code: 
+		- flour = {'flour', 'batter', 'pancakes', 'pasta'} 
+		- egg = {'egg', 'omelette', 'pancakes', 'pasta'} 
+		- milk = {'milk', 'batter', 'pancakes', 'omelette'} 
+		- print('flour:', flour) print('egg:', egg) print('milk:', milk)
+	
+	- Output
+		- flour: {'batter', 'pancakes', 'pasta', 'flour'} 
+		- egg: {'egg', 'pancakes', 'pasta', 'omelette'} 
+		- milk: {'batter', 'pancakes', 'milk', 'omelette'}
+	
+	- Sets: Membership
+		- Checking whether an element exists in a set or not is an O(1) operation
+			- ![[sets membership.png]]
+
+
+- Dictionaries
+		- A dictionary is an unsorted collection that associates a unique key with any value
+			- Insertion order is maintained (Python 3.7)
+			
+			- ![[dictionaries rec 10-25-23.png]]
+	
+	- Dictionaries: Constant time operations
+		- These operations all happen in O(1) time
+			- ![[dictionary operations.png]]
+	
+	- Dictionaries: Iteration
+		- Can use a for-loop to iterate over a dictionary by key
+			- ![[dictionary iteration.png]]
+
+
+
+- Structures
+	- A structure is a user defined data type that can be used to group a collection of named types into a single type
+	- Class
+		- ![[dataclass class.png]]
+
+- Structures: Cities
+	- Consider the problem of displaying a map of a bunch of cities from a file 
+	- Each city has a name and an (x, y) integer coordinate 
+	- We will use turtle to label each city and draw a line to the next one 
+	- In the end we will draw a line from the last city back to the first
+		- We will first define a new structure, City, to represent each city
+			- ![[defining new dataclass.png]]
+		- To construct a new City object, cityB
+			- ![[Pasted image 20231025081628.png]]
+		- When printing the new object
+			- ![[Pasted image 20231025081652.png]]
+		- Once created, we can access and/or change the fields of our object by field name
+			- ![[Pasted image 20231025081733.png]]
+		- We can use a list to store all the City objects that are read in from the file
+			- ![[Pasted image 20231025081837.png]]
+		- Visually, our list, cities, looks like
+			- ![[Pasted image 20231025082150.png]]
+		- We can loop over our list with a variable, city that points to each City object one at a time
+			- ![[Pasted image 20231025082219.png]]
+		- The code to draw the map from the list of Cities objects using turtle
+			- ![[Pasted image 20231025081934.png]]
+
+Recitation Quiz:
+1. rit_irl = {"brick", "fedora", "tiger", "brick"}  
+	print(rit_irl)
+	
+	Any random order of "brick", "fedora", and "tiger". There will only be one "brick" since duplicates are not allowed in sets
+
+2. ![[Pasted image 20231025082538.png]]False, 2017, ("munson", "destler", "simone", "rose"), "munson: 2017, destler: 2007"
+
+3. O(1), O(1), O(n)
+
+4. ![[Pasted image 20231025082814.png]]
+In line 10, there is a typo in gpa. It is only changing the value of Tammy.gpaa, which wouldn't change the gpa in the dataclass
+
+5. ![[Pasted image 20231025082957.png]]
+
+student[1] = Joe, 18, 3.2
+student[2] = Sue, 21, 3.4
+student[3] = Bob, 19, 3.5
+
+Total = 3.2 + 3.4 + (3.5 + 0.1)
+
+Average: 6.6 + 3.6 = 10.2 / 3 
+Average: 3.4
