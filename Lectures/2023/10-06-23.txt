@@ -1,0 +1,104 @@
+- Testing
+	- The Collatz Conjecture 
+		- For any positive integer, the sequence described by the following mathematical function will always reach N=1
+		- If N is even
+			- F(N) = N/2
+		- If N is odd
+			- 3N + 1
+		- Anything less than 1 is undefined
+			-  ![[collatz conjecture.png]]
+	
+	
+	- Testing
+		- Test Last Development (TLD)
+			- Implement the program's functionality then write the tests for it after
+		- Test Driven Development (TDD)
+			- Common practice
+			- Write the tests first and then implement functionality after
+			- Incrementally, you develop your solution to pass all the tests you previously wrote
+				- ![[test driven development.png]]
+				- Program to be delivered to customer in collatz.py
+					- Known as production code
+	
+				- Test code goes in a separate file
+					- Not intended for customer
+	
+	- Stubbing functions
+		- To write a test that fails, the function has to be stubbed
+		- A stubbed function returns:
+			- A proper function signature that can be called by the tester
+			- A function with a minimum body/code
+				- A docstring
+				- return
+				- pass
+	
+	- Anatomy of a Good Test
+		- Small in nature and tests one thing
+		- Fast and execute quickly
+	
+		- Unit testing
+			- A practice where a developer writes automated tests to make sure a section of the program behaves properly
+	
+	- Steps
+		- Fail
+			- Start with no base case
+			- Test the program to see why it fails
+		- Pass
+			- Implement and/or adjust code into the program so it will pass
+		- Refactor
+			- Simplifies the code
+			- With only one base case, there is no need to refactor the code
+			- ![[refactor1.png]]
+			- Can use loops to to test more values
+			- ![[refactor for loop.png]]
+			- If code is already at simplest form and is extensible to any number of test cases we devise, no need to refactor
+		
+	- Add expected values
+		- ![[testing expected values.png]]
+	
+	- Software testing levels
+		- Developers
+			- Tests individual component
+		- Testers
+			- Tests component groups
+			- Tests integrated system
+		- End users
+			- Test final system
+
+- Debugging
+	- Syntax errors
+		- The result of using the language incorrectly
+			- Forgetting def keyword when declaring a function
+			- Forgetting a colon after an if condition 
+			- Invoking a misspelled function name 
+			- Forgetting commas between function parameters 
+			- Inconsistent indentation/whitespace
+		- Pycharm underlines errors in red
+	
+	- Runtime errors
+		- An application error that occurs when running program
+			- Using the wrong number of arguments to a function 
+			- Doing arithmetic with incompatible types 
+			- Divide by zero 
+			- Subscripting a string out of bounds
+		- Pycharm prints the traceback to the console
+			- Hotlinks of the errors will jump to the line where the error is in the code
+
+- Semantic errors
+	- When a statement is syntactically valid but does not do what the programmer intended
+	- Using < instead of <= in a condition 
+	- “Off by one” errors looping too many/too few time 
+	- Path through a function that returns an incorrect result, or None 
+	- Order of operation mistake
+		- 1 + 5 * 6   vs   (1 + 5) * 6
+	
+	- Debugging
+		- The process of finding and resolving defects, "bugs", in a program that prevents correct operation
+		- Debugger
+			- Allows the programmer to pause the program during execution so it can evaluate the state of the program
+				- Debugging controls
+					- ![[debugger pycharm controls.png]]
+					- ![[debugger controls pycharm 2.png]]
+		- Breakpoints
+			- An intentional stopping or pausing place in a program placed for debugging purposes
+
