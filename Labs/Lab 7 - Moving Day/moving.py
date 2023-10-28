@@ -28,10 +28,15 @@ def make_item(name, weight):
 def make_box(id, capacity):
     size = 0
     items = []
-    return Box(items, int(size), id, capacity)
+    return Box(items, int(size), id, int(capacity))
 
 
 def read(file):
+    """
+    Read data from a file and sort lists of boxes and items.
+    :param file: Input file
+    :return: Items list and boxes list
+    """
     boxes = []
     items = []
     with open(file, "r") as file:
@@ -45,11 +50,55 @@ def read(file):
         return items, boxes
 
 
+def greedy1(items, boxes):
+    items.sort(key=lambda x: x.weight, reverse=True)
+    for item in items:
+        boxes.sort(key=lambda x: x.capacity, reverse=True)
+        for box in boxes:
+            if item.weight <= box.capacity:
+                box.items.append(item)
+                box.capacity -= item.weight
+                break
+
+
+def greedy2(items, boxes):
+    pass
+
+
+def greedy3(items, boxes):
+    pass
+
+
+def output(boxes):
+    pass
+
+
 def main():
+    """
+    pass
+    """
     user_input = input("What file do you want to select? ")
     items, boxes = read(user_input)
-    print(boxes)
-    print(items)
+
+    # Copy boxes to apply multiple strategies
+    boxes1 = [Box([], box.capacity, box.id, box.size) for box in boxes]
+    boxes2 = [Box([], box.capacity, box.id, box.size) for box in boxes]
+    boxes3 = [Box([], box.capacity, box.id, box.size) for box in boxes]
+
+    # Apply the three greedy strategies
+    greedy1(items, boxes1)
+    greedy2(items, boxes2)
+    greedy3(items, boxes3)
+
+    # Output
+    print("Results from Greedy Strategy 1")
+    output(boxes1)
+
+    print("Results from Greedy Strategy 2")
+    output(boxes2)
+
+    print("Results from Greedy Strategy 3")
+    output(boxes3)
 
 
 # Main guard
