@@ -154,21 +154,23 @@ def output(items, boxes):
     for box in boxes:
         for items_boxed in box.items:
             boxed_items.append(items_boxed)
-    if len(items) > len(boxed_items):  # Check if all items were in boxes
-        print("Unable to pack all items!")
-    else:
-        print("All items successfully packed into boxes!")
+    all_items_packed = True  # Assume all items are packed until proven otherwise
     for box in boxes:  # Print details of packed items
         print("Box " + str(box.id) + " of weight capacity " + str(box.size) + " contains:")
         for items_box in box.items:
-            print(items_box.name + " of weight " + str(items_box.weight))
+            print("  " + items_box.name + " of weight " + str(items_box.weight))
     boxed_items = []
     for box in boxes:
         for items_boxed in box.items:
             boxed_items.append(items_boxed)
     for item in items:  # Check if items are left behind
         if item not in boxed_items:
+            all_items_packed = False
             print(item.name + " of weight " + str(item.weight) + " got left behind.")
+        if all_items_packed:
+            print("All items successfully packed into boxes!")
+        else:
+            print("Unable to pack all items!")
 
 def main():
     """
@@ -196,10 +198,10 @@ def main():
     print("")
     print("Results from Greedy Strategy 1")
     output(items1, boxes1)
-    print("")
+    print("\n")
     print("Results from Greedy Strategy 2")
     output(items2, boxes2)
-    print("")
+    print("\n")
     print("Results from Greedy Strategy 3")
     output(items3, boxes3)
 
