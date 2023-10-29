@@ -23,9 +23,21 @@ class Item:
 
 
 def make_item(name, weight):
+    """
+    Maker function for item list
+    :param name: Name of item
+    :param weight: Weight of item
+    :return: An item object with name and weight
+    """
     return Item(name, int(weight))
 
-def make_box(id,size):
+def make_box(id, size):
+    """
+    Maker function for box list
+    :param id: Count/id of box
+    :param size: Box capacity
+    :return: A box object with id and capacity
+    """
     items = []
     return Box(items, int(size), int(id), int(size))
 
@@ -52,6 +64,10 @@ def read(file):
 
 
 def insertion_sort_greedy(items):
+    """
+    Performs a greedy insertion sort on a list of items based on weight
+    :param items: List of items
+    """
     for i in range(1, len(items)):
         j = i
         while j > 0 and items[j - 1].weight < items[j].weight:
@@ -64,8 +80,9 @@ def greedy1(items, boxes):
     Greedy 1 strategy: Sorts items by decreasing weight and iterate items
     from greatest to lowest weight. Then place item in the box with the biggest
     capacity remaining
-    :param items: Items list
-    :param boxes: Boxes list
+    :param items: Items list with weight attributes
+    :param boxes: Boxes list with capacity attributes
+    :return: A tuple of a sorted item list and initial boxes list
     """
     insertion_sort_greedy(items)  # Implement insertion sort for items list
     for item in items:  # Iterate through sorted items list
@@ -82,69 +99,66 @@ def greedy1(items, boxes):
             box_greedy1.capacity -= item.weight  # Subtract item weight from box capacity
     return (items, boxes)  # Returns a tuple
 
+
 def greedy2(items, boxes):
     """
-    Greedy 2 strategy: Sorts items by decreasing weight and iterate items
-    from greatest to lowest weight. Then place item in the box with the lowest
-    capacity remaining
-    :param items: Items list
-    :param boxes: Boxes list
+    Greedy 2 strategy: Sorts items by decreasing weight and place each item in
+    the box with the least remaining allowed weight that can support the item.
+    If no box can support the item, it is left out.
+    :param items: Items list with weight attributes
+    :param boxes: Boxes list with capacity attributes
+    :return: A tuple of a sorted item list and initial boxes list
     """
-    insertion_sort_greedy(items)  # Implement insertion sort for items list
+    insertion_sort_greedy(items)  # Sort items by decreasing weight
     for item in items:  # Iterate through sorted items list
-        box_greedy2 = 0
-        lowest_capacity = 1000
+        box_greedy2 = None
+        min_remaining_capacity = 10000  # Initialize with a big value
         for box in boxes:  # Iterate through boxes
-            # if item doesn't fit in box, check for the next box that fits, check again or: run normal insertion
-            # sort, loop through box list, compare item weight and box capacity, if it fits put it in box
-            if item.weight < box.size:
-                break
-            if box.capacity < lowest_capacity:  # Compare box capacity with the greatest capacity
+            if item.weight <= box.capacity and box.capacity - item.weight < min_remaining_capacity:
                 box_greedy2 = box
-                lowest_capacity = box.capacity
-        if item.weight > box_greedy2.capacity:  # If weight of item is bigger than capacity, ignore
-            pass
+                min_remaining_capacity = box.capacity - item.weight
+        if box_greedy2 is not None:  # If a suitable box is found
+            box_greedy2.items.append(item)  # Append item to the chosen box
+            box_greedy2.capacity -= item.weight  # Update the box's remaining capacity
         else:
-            box_greedy2.items.append(item)  # Append item if it meets requirements
-            box_greedy2.capacity -= item.weight  # Subtract item weight from box capacity
+            pass  # Ignore if item cannot go into box
     return (items, boxes)  # Returns a tuple
 
 
 def greedy3(items, boxes):
     """
-    Greedy 3 strategy: Sorts items by decreasing weight and iterate through all
-    items. Then place items in one box at a time. When the box is full, then
-    move onto the next box and place items in that box.
-    :param items: Items list
-    :param boxes: Boxes list
+    Greedy 3 strategy: Sorts items by decreasing weight and fill the boxes one by one.
+    For each box, iterate through all remaining items and place items in the current box.
+    :param items: Items list with weight attributes
+    :param boxes: Boxes list with capacity attributes
+    :return: A tuple of a sorted item list and initial boxes list
     """
-    insertion_sort_greedy(items)  # Implement insertion sort for items list
-    for box in boxes:  # Iterate through sorted boxes list
-        box_greedy3 = 0
-        for item in items:  # Iterate through items
-            current_capacity = 0
-            if Box.capacity == current_capacity:  # Compare box capacity with the current capacity
-                box_greedy3 = box
-        if item.weight > box_greedy3.capacity:  # If weight of item is greater than capacity, ignore
-            pass
-        else:
-            Box.items.append(item)  # Append item if it meets requirements
-            box_greedy3.capacity -= items.weight  # Subtract item weight from box capacity
-            items.remove(item)  # Remove item from items list
+    insertion_sort_greedy(items)  # Sort items by decreasing weight
+    for box in boxes:  # Iterate through boxes
+        remaining_items = list(items)  # Make sorted items list copy
+        for item in remaining_items:  # Iterate through the copied items list
+            if item.weight <= box.capacity:
+                box.items.append(item)  # Append item to the current box
+                box.capacity -= item.weight  # Update the box's remaining capacity
+                items.remove(item)  # Remove the item from the original list of remaining items
     return (items, boxes)  # Returns a tuple
 
 
 def output(items, boxes):
+    """
+    Display the packing results of items into boxes.
+    :param items: List of sorted items
+    :param boxes: List of sorted boxes
+    """
     boxed_items = []
     for box in boxes:
         for items_boxed in box.items:
             boxed_items.append(items_boxed)
-
-    if len(items) > len(boxed_items):
+    if len(items) > len(boxed_items):  # Check if all items were in boxes
         print("Unable to pack all items!")
     else:
         print("All items successfully packed into boxes!")
-    for box in boxes:
+    for box in boxes:  # Print details of packed items
         print("Box " + str(box.id) + " of weight capacity " + str(box.size) + " contains:")
         for items_box in box.items:
             print(items_box.name + " of weight " + str(items_box.weight))
@@ -152,19 +166,18 @@ def output(items, boxes):
     for box in boxes:
         for items_boxed in box.items:
             boxed_items.append(items_boxed)
-
-    for item in items:
+    for item in items:  # Check if items are left behind
         if item not in boxed_items:
             print(item.name + " of weight " + str(item.weight) + " got left behind.")
 
 def main():
     """
-    pass
+    Main function for executing item-box allocation greedy strategies.
     """
-    user_input = input("What file do you want to select? ")
+    user_input = input("What file do you want to select? ")  # Ask for user input
     items, boxes = read(user_input)
 
-    # Copy boxes to apply multiple strategies
+    # Copy boxes and items to apply multiple strategies
     boxes1 = [Box([], box.capacity, box.id, box.size) for box in boxes]
     boxes2 = [Box([], box.capacity, box.id, box.size) for box in boxes]
     boxes3 = [Box([], box.capacity, box.id, box.size) for box in boxes]
@@ -176,7 +189,7 @@ def main():
     # Apply the three greedy strategies
     greedy1(items1, boxes1)
     greedy2(items2, boxes2)
-
+    greedy3(items3, boxes3)
 
     # Output
     print("Enter datafile name: " + user_input)
@@ -186,9 +199,9 @@ def main():
     print("")
     print("Results from Greedy Strategy 2")
     output(items2, boxes2)
-    #
-    # print("Results from Greedy Strategy 3")
-    # output(items3, boxes3)
+    print("")
+    print("Results from Greedy Strategy 3")
+    output(items3, boxes3)
 
 
 # Main guard
