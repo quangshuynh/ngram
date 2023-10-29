@@ -8,7 +8,7 @@ author: Quang Huynh
 
 from dataclasses import dataclass
 
-@dataclass
+@dataclass  # Box dataclass
 class Box:
     items: list
     capacity: int
@@ -16,7 +16,7 @@ class Box:
     size: int
 
 
-@dataclass
+@dataclass  # Item dataclass
 class Item:
     name: str
     weight: int
