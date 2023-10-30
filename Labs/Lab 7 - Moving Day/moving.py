@@ -68,7 +68,7 @@ def insertion_sort_greedy(items):
     Performs a greedy insertion sort on a list of items based on weight
     :param items: List of items
     """
-    for i in range(1, len(items)):
+    for i in range(0, len(items)):
         j = i
         while j > 0 and items[j - 1].weight < items[j].weight:
             items[j], items[j - 1] = items[j - 1], items[j]  # Swap
@@ -112,7 +112,7 @@ def greedy2(items, boxes):
     insertion_sort_greedy(items)  # Sort items by decreasing weight
     for item in items:  # Iterate through sorted items list
         box_greedy2 = None
-        min_remaining_capacity = 10000  # Initialize with a big value
+        min_remaining_capacity = 100000  # Initialize with a big value
         for box in boxes:  # Iterate through boxes
             if item.weight <= box.capacity and box.capacity - item.weight < min_remaining_capacity:
                 box_greedy2 = box
@@ -135,8 +135,8 @@ def greedy3(items, boxes):
     """
     insertion_sort_greedy(items)  # Sort items by decreasing weight
     for box in boxes:  # Iterate through boxes
-        remaining_items = list(items)  # Make sorted items list copy
-        for item in remaining_items:  # Iterate through the copied items list
+        box_greedy3 = list(items)  # Make sorted items list copy
+        for item in box_greedy3:  # Iterate through the copied items list
             if item.weight <= box.capacity:
                 box.items.append(item)  # Append item to the current box
                 box.capacity -= item.weight  # Update the box's remaining capacity
@@ -159,18 +159,15 @@ def output(items, boxes):
         print("Box " + str(box.id) + " of weight capacity " + str(box.size) + " contains:")
         for items_box in box.items:
             print("  " + items_box.name + " of weight " + str(items_box.weight))
-    boxed_items = []
-    for box in boxes:
-        for items_boxed in box.items:
-            boxed_items.append(items_boxed)
     for item in items:  # Check if items are left behind
         if item not in boxed_items:
             all_items_packed = False
             print(item.name + " of weight " + str(item.weight) + " got left behind.")
-        if all_items_packed:
-            print("All items successfully packed into boxes!")
-        else:
-            print("Unable to pack all items!")
+    if all_items_packed:
+        print("All items successfully packed into boxes!")
+    else:
+        print("Unable to pack all items!")
+
 
 def main():
     """
