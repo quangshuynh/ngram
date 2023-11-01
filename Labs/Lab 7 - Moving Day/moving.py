@@ -84,7 +84,7 @@ def greedy1(items, boxes):
     capacity remaining
     :param items: Items list with weight attributes
     :param boxes: Boxes list with capacity attributes
-    :return: A tuple of a sorted item list and initial boxes list
+    :return: List of items after packing into boxes and list of boxes after packing items.
     """
     insertion_sort_greedy(items)  # Implement insertion sort for items list
     for item in items:  # Iterate through sorted items list
@@ -99,7 +99,7 @@ def greedy1(items, boxes):
         else:
             box_greedy1.items.append(item)  # Append item if it meets requirements
             box_greedy1.capacity -= item.weight  # Subtract item weight from box capacity
-    return (items, boxes)  # Returns a tuple
+    return items, boxes
 
 
 def greedy2(items, boxes):
@@ -109,7 +109,7 @@ def greedy2(items, boxes):
     If no box can support the item, it is left out.
     :param items: Items list with weight attributes
     :param boxes: Boxes list with capacity attributes
-    :return: A tuple of a sorted item list and initial boxes list
+    :return: List of items after packing into boxes and list of boxes after packing items.
     """
     insertion_sort_greedy(items)  # Sort items by decreasing weight
     for item in items:  # Iterate through sorted items list
@@ -124,7 +124,7 @@ def greedy2(items, boxes):
             box_greedy2.capacity -= item.weight  # Update the box's remaining capacity
         else:
             pass  # Ignore if item cannot go into box
-    return (items, boxes)  # Returns a tuple
+    return items, boxes
 
 
 def greedy3(items, boxes):
@@ -133,7 +133,7 @@ def greedy3(items, boxes):
     For each box, iterate through all remaining items and place items in the current box.
     :param items: Items list with weight attributes
     :param boxes: Boxes list with capacity attributes
-    :return: A tuple of a sorted item list and initial boxes list
+    :return: List of items after packing into boxes and list of boxes after packing items.
     """
     insertion_sort_greedy(items)  # Sort items by decreasing weight
     for box in boxes:  # Iterate through boxes
@@ -143,14 +143,14 @@ def greedy3(items, boxes):
                 box.items.append(item)  # Append item to the current box
                 box.capacity -= item.weight  # Update the box's remaining capacity
                 items.remove(item)  # Remove the item from the original list of remaining items
-    return (items, boxes)  # Returns a tuple
+    return items, boxes
 
 
 def output(items, boxes):
     """
     Display the packing results of items into boxes.
-    :param items: List of sorted items
-    :param boxes: List of sorted boxes
+    :param items: List of items packed
+    :param boxes: List of packed boxes
     """
     all_items_packed = True  # Assume all items are packed until proven otherwise
     for box in boxes:  # Print details of packed items
