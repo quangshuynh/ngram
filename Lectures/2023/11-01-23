@@ -1,0 +1,88 @@
+- A stack is a data structure where elements are added and removed from only one end - the top
+	- Last In First Out (LIFO), First In Last Out (FILO)
+	- Examples of stacks in the real world
+		- A tower of compact discs
+		- A napkin holder
+		- A PEZ candy dispenser
+
+- Stack operations
+	- The value gets "pushed" to the top of a stack
+	- The top gets "popped" when popped
+		- ![[stack operation1.png]]
+
+- Stack implementation
+	- A stack can be implemented with a FrozenNode structure and a variable that points to the top node
+		- ![[frozennode stack.png]]
+
+- Stack implementation: Stack structure
+	- We can use encapsulation to store both the size and the top node in a new structure, Stack
+		- The stack functions change the Stack object field values, so it must be declared unfrozen (mutable)
+		- Because top is also a function, we rename our top field to be nodes to avoid confusion
+			- ![[stack structure.png]]
+
+- Stack Operations
+	- Make
+		- ![[making stack.png]]
+	- Checking if empty
+		- ![[Empty stack.png]]
+	- Size
+		- ![[size stack.png]]
+	- Push
+		- ![[stack push.png]]
+	- Top
+		- ![[stack top2.png]]
+	- Pop
+		- ![[stack pop2.png]]
+
+
+- Queue
+	- A data structure where elements are added to the back and removed from the front
+		- First In First Out (FIFO)
+		- Examples of queues in the real world
+			- A line of people at amusement park ride
+			- Vehicles arriving at toll booth
+			- Bottle filling system (circular queue)
+
+- Queue operations
+	- The value gets "enqueued" at the front
+	- The front gets "dequeued" from the back
+		- ![[queue operations.png]]
+
+- Queue implementation: Node structure
+	- Unlike with a stack, the nodes in a queue must be unfrozen, MutableNode, to support operations like enqueue
+		- ![[queue node structure.png]]
+
+- Queue implementation: Queue structure
+	- Encapsulation can be used to store the size, front and back in a new mutable structure, Queue
+		- ![[queue structure.png]]
+
+- Queue operations
+	- Make
+		- ![[queue make.png]]
+	- Check if empty
+		- ![[queue empty.png]]
+	- Size
+		- ![[queue size.png]]
+	- Enqueue
+		- ![[queue enqueue.png]]
+	- Dequeue
+		- ![[queue dequeue.png]]
+	- Front and back
+		- ![[queue front and back.png]]
+
+- Stacks and queues: Performance
+	- Stacks:
+		- Make: O(1)
+		- Empty: O(1)
+		- Push: O(1)
+		- Pop: O(1)
+		- Top: O(1)
+		- Size: O(1)
+	- Queues
+		- Make: O(1)
+		- Empty: O(1)
+		- Enqueue: O(1)
+		- Dequeue: O(1)
+		- Front: O(1)
+		- Back: O(1)
+		- Size: O(1)
