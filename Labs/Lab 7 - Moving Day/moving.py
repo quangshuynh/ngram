@@ -6,6 +6,7 @@ language: python3
 author: Quang Huynh
 """
 
+
 from dataclasses import dataclass
 
 @dataclass  # Box dataclass
@@ -31,7 +32,8 @@ def make_item(name, weight):
     """
     return Item(name, int(weight))
 
-def make_box(id, size):
+
+def make_box(box_id, size):
     """
     Maker function for box list
     :param id: Count/id of box
@@ -39,7 +41,7 @@ def make_box(id, size):
     :return: A box object with id and capacity
     """
     items = []
-    return Box(items, int(size), int(id), int(size))
+    return Box(items, int(size), int(box_id), int(size))
 
 
 def read(file):
@@ -150,15 +152,15 @@ def output(items, boxes):
     :param items: List of sorted items
     :param boxes: List of sorted boxes
     """
-    boxed_items = []
-    for box in boxes:
-        for items_boxed in box.items:
-            boxed_items.append(items_boxed)
     all_items_packed = True  # Assume all items are packed until proven otherwise
     for box in boxes:  # Print details of packed items
         print("Box " + str(box.id) + " of weight capacity " + str(box.size) + " contains:")
         for items_box in box.items:
             print("  " + items_box.name + " of weight " + str(items_box.weight))
+    boxed_items = []
+    for box in boxes:
+        for items_boxed in box.items:
+            boxed_items.append(items_boxed)
     for item in items:  # Check if items are left behind
         if item not in boxed_items:
             all_items_packed = False
@@ -181,9 +183,9 @@ def main():
     boxes2 = [Box([], box.capacity, box.id, box.size) for box in boxes]
     boxes3 = [Box([], box.capacity, box.id, box.size) for box in boxes]
 
-    items1 = items
-    items2 = items
-    items3 = items
+    items1 = [Item(item.name, item.weight) for item in items]
+    items2 = [Item(item.name, item.weight) for item in items]
+    items3 = [Item(item.name, item.weight) for item in items]
 
     # Apply the three greedy strategies
     greedy1(items1, boxes1)
