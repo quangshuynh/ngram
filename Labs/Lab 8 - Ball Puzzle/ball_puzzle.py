@@ -4,7 +4,7 @@ file: ball_puzzle.py
 language: python3
 author: Quang Huynh
 """
-import ball_puzzle_animate as bsa
+import ball_puzzle_animate as bpa
 import cs_stack as s
 from dataclasses import dataclass
 
@@ -16,42 +16,44 @@ class Cans:
     blue: list
 
 
-def in_it():
-    # colored_cans = [s.make_empty_stack(), s.make_empty_stack(), s.make_empty_stack()]  # Colored can list: red, green, blue
-    stack1 = s.make_empty_stack()
-    stack2 = s.make_empty_stack()
-    stack3 = s.make_empty_stack()
-    colored_cans = [stack1, stack2, stack3]
+def initialization():
+    """
+    Create three empty stacks for each colored can and initialize
+    stacks to represent colored cans. Then, asks user input for
+    configuration of initial can, pushes each ball from the initial
+    can onto the red can stack and animates the initialization.
+    :return: A list that has the three colored cans (Red, green, blue)
+    """
+    red_can = s.make_empty_stack()
+    green_can = s.make_empty_stack()
+    blue_can = s.make_empty_stack()
+    colored_cans = [red_can, green_can, blue_can]
     initial_can = input("Enter the configuration in the initial can: ")
     for ball in initial_can:
         s.push(colored_cans[0], ball)
-    bsa.animate_init(initial_can)
+    bpa.animate_init(initial_can)
     return colored_cans
 
 
 def move_ball(stack_list, stack1, stack2):
+    """
+    Moves ball from one can to another can from a stack list
+    :param stack_list: A list of stacks of the colored cans
+    :param stack1: Ball from initial can
+    :param stack2: Ball to be moved to destination can
+    """
     top_of_can = s.pop(stack_list[stack1])
     s.push(stack_list[stack2], top_of_can)
-    bsa.animate_move(stack_list, stack1, stack2)
-    # if not s.is_empty(stack_list[0]):
-    #     top_of_can = s.top(stack_list[0])
-    #     if top_of_can == "R":
-    #         s.pop(stack_list[0])
-    #         s.push(stack_list[1], top_of_can)
-    #         bsa.animate_move(stack_list, 0, 1)
-    #     if top_of_can == "G":
-    #         s.pop(stack_list[0])
-    #         s.push(stack_list[1], top_of_can)
-    #         bsa.animate_move(stack_list, 0, 1)
-    #     if top_of_can == "B":
-    #         s.pop(stack_list[0])
-    #         s.push(stack_list[1], top_of_can)
-    #         bsa.animate_move(stack_list, 0, 2)
+    bpa.animate_move(stack_list, stack1, stack2)
 
 
 def algorithm(stack_list):
+    """
+    Sorts all the colored balls into their corresponding colored can
+    :param stack_list: A list of stacks of the colored cans
+    :return: The number of moves to solve the puzzle
+    """
     moves = 0
-    # bsa.animate_move(stack_list, stack_list[0], stack_list[1])
     while not s.is_empty(stack_list[0]):
         if s.top(stack_list[0]) == "G":
             move_ball(stack_list, 0, 1)
@@ -73,11 +75,16 @@ def algorithm(stack_list):
 
 
 def main():
-    stack_list = in_it()
+    """
+    Initializes the colored cans, solves the puzzle, and
+    displays the number of moves it took to solve the puzzle.
+    """
+    stack_list = initialization()
     number_of_moves = algorithm(stack_list)
     print("Puzzle solved in " + str(number_of_moves) + " moves!")
-    input("Close the window to quit.")
-    bsa.animate_finish()
+    print("Close the window to quit")
+    bpa.animate_finish()
+
 
 
 if __name__ == "__main__":
