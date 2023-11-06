@@ -4,6 +4,7 @@ file: ball_puzzle.py
 language: python3
 author: Quang Huynh
 """
+
 import ball_puzzle_animate as bpa
 import cs_stack as s
 from dataclasses import dataclass
@@ -14,25 +15,6 @@ class Cans:
     red: list
     green: list
     blue: list
-
-
-def initialization():
-    """
-    Create three empty stacks for each colored can and initialize
-    stacks to represent colored cans. Then, asks user input for
-    configuration of initial can, pushes each ball from the initial
-    can onto the red can stack and animates the initialization.
-    :return: A list that has the three colored cans (Red, green, blue)
-    """
-    red_can = s.make_empty_stack()
-    green_can = s.make_empty_stack()
-    blue_can = s.make_empty_stack()
-    colored_cans = [red_can, green_can, blue_can]
-    initial_can = input("Enter the configuration in the initial can: ")
-    for ball in initial_can:
-        s.push(colored_cans[0], ball)
-    bpa.animate_init(initial_can)
-    return colored_cans
 
 
 def move_ball(stack_list, stack1, stack2):
@@ -54,37 +36,43 @@ def algorithm(stack_list):
     :return: The number of moves to solve the puzzle
     """
     moves = 0
-    while not s.is_empty(stack_list[0]):
-        if s.top(stack_list[0]) == "G":
-            move_ball(stack_list, 0, 1)
+    while not s.is_empty(stack_list[0]):  # When red can is not empty
+        if s.top(stack_list[0]) == "G":   # If top ball is green
+            move_ball(stack_list, 0, 1)  # Move to green can
             moves += 1
         else:
-            move_ball(stack_list, 0, 2)
+            move_ball(stack_list, 0, 2)  # All other colors move from red can to blue can
             moves += 1
-    while not s.is_empty(stack_list[2]):
-        if s.top(stack_list[2]) == "R":
-            move_ball(stack_list, 2, 0)
+    while not s.is_empty(stack_list[2]):  # When blue can is not empty
+        if s.top(stack_list[2]) == "R":  # If top ball is red
+            move_ball(stack_list, 2, 0)  # Move from blue can to red can
             moves += 1
         else:
-            move_ball(stack_list, 2, 1)
+            move_ball(stack_list, 2, 1)  # All other colors move from blue can to green can
             moves += 1
-    while s.top(stack_list[1]) != "G":
-        move_ball(stack_list, 1, 2)
+    while s.top(stack_list[1]) != "G":  # When top ball is not green
+        move_ball(stack_list, 1, 2)  # Move from green can to blue can
         moves += 1
     return moves
 
 
 def main():
     """
-    Initializes the colored cans, solves the puzzle, and
-    displays the number of moves it took to solve the puzzle.
+    Initializes the colored cans, solves the ball puzzle, and
+    displays how many moves it took to solve the ball puzzle.
     """
-    stack_list = initialization()
-    number_of_moves = algorithm(stack_list)
+    initial_can = input("Enter initial string (R, G, B) of balls in first can: ")  # User inputs colored balls
+    bpa.animate_init(initial_can)
+    red_can = s.make_empty_stack()  # Red can stack
+    green_can = s.make_empty_stack()  # Green can stack
+    blue_can = s.make_empty_stack()  # Blue can stack
+    colored_cans = [red_can, green_can, blue_can]  # Colored can stack list
+    for ball in initial_can:
+        s.push(colored_cans[0], ball)  # Pushes the inputted string into the red can
+    number_of_moves = algorithm(colored_cans)
     print("Puzzle solved in " + str(number_of_moves) + " moves!")
     print("Close the window to quit")
     bpa.animate_finish()
-
 
 
 if __name__ == "__main__":
