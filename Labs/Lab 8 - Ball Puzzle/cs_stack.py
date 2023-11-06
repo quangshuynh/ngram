@@ -1,121 +1,68 @@
 """
-CSCI-141 Computer Science 1 Presentation Code
-10-StacksQueues
-Stacks
+Stack interface.
+file: cs_stack.py
+author: CS @ rit.edu
+This is the Stack data structure implemented by linked node sequences.
 
-This is the definition of a Stack structure and its supporting routines.
+The Stack datatype constructor makes a growable stack of nodes.
+
 """
 
-from node_types import *
+from node_types import FrozenNode as Node
+from typing import Union
+from dataclasses import dataclass
 
-@dataclass(frozen=False)                # unfrozen because operations change field values
+@dataclass(frozen = False)
 class Stack:
-    size: int                           # the number of elements in the stack
-    nodes: Union[None, FrozenNode]      # the collection of nodes starting with the top node
-
-def mk_empty_stack():
+    size: int
+    top: Union[None, Node]
+    
+def make_empty_stack():
     """
-    Create and return a new empty stack.
-    :return: a new stack with size initialized to zero and nodes initialized
-    to None (empty).
+    Returns a new stack with size initialized to zero and
+    nodes initialed to the empty list. 
     """
     return Stack(0, None)
 
 def push(stack, element):
     """
-    Add a new element to the top of the stack by changing the stack.
-    :param stack: the stack
-    :param element: the new element to push
-    :return None
+    Add an element to the top of the stack. The stack state changes.
     """
-    stack.nodes = FrozenNode(element, stack.nodes)
+    stack.top = Node(element, stack.top)
     stack.size = stack.size + 1
 
+    
 def top(stack):
     """
-    Return top element on stack without changing the stack.
-    :pre: stack is not empty
-    :param stack: the stack
-    :return: the top element on the stack
+    Return top element on stack.  Does not change stack.
+    precondition: stack is not empty
     """
-    if empty_stack(stack):
-        raise IndexError('top of empty stack')
-
-    return stack.nodes.value
+    if is_empty(stack):
+        raise IndexError("top of empty stack") 
+    return stack.top.value
 
 def pop(stack):
     """
-    Remove the top element in the stack by changing the stack.
-    :pre: stack is not empty
-    :param stack: the stack
-    :return: None
+    Remove the top element in the stack and returns the removed value. 
+    The stack state changes.
+    precondition: stack is not empty
     """
-    if empty_stack(stack):
-        raise IndexError('pop on empty stack')
-
-    stack.nodes = stack.nodes.next
+    if is_empty(stack):
+        raise IndexError("pop on empty stack") 
+    popped = stack.top.value
+    stack.top = stack.top.next
     stack.size = stack.size - 1
-
-def empty_stack(stack):
+    return popped
+    
+def is_empty(stack):
     """
     Is the stack empty?
-    :param stack: the stack
-    :return: whether the stack is empty or not
     """
-    return stack.nodes == None
-
+    return stack.top is None
+    
 def size(stack):
     """
-    How many elements are currently in the stack?
-    :param stack: the stack
-    :return: the size of the stack
-    """
+    Return the # of elements
+    """  
     return stack.size
 
-def main():
-    """ The main routine tests the stack data structure. """
-    # begin with an empty stack
-    stack_str = mk_empty_stack()
-    print('Creating empty stack...')
-    print('Stack empty?', True == empty_stack(stack_str))
-    print('Stack size is 0?', 0 == size(stack_str))
-
-    # add first element
-    print('push A...')
-    push(stack_str, 'A')
-    print('Stack not empty?', False == empty_stack(stack_str))
-    print('Stack size is 1?', 1 == size(stack_str))
-    print('top is A?', 'A' == top(stack_str))
-
-    # add second element
-    print('push B...')
-    push(stack_str, 'B')
-    print('top is B?', 'B' == top(stack_str))
-
-    # add third element
-    print('push C...')
-    push(stack_str, 'C')
-    print('top is C?', 'C' == top(stack_str))
-    print('Stack size is 3?', 3 == size(stack_str))
-
-    # pop top element, C
-    print('pop...')
-    pop(stack_str)
-    print('Stack not empty?', False == empty_stack(stack_str))
-    print('Stack size is 3?', 2 == size(stack_str))
-    print('top is B?', 'B' == top(stack_str))
-
-    # add fourth element
-    print('push D...')
-    push(stack_str, 'D')
-    print('top is D?', 'D' == top(stack_str))
-
-    # empty the stack
-    print('Emptying the stack...')
-    while not empty_stack(stack_str):
-        print('Top of stack:', top(stack_str))
-        print('pop...')
-        pop(stack_str)
-
-if __name__ == '__main__':
-    main()
