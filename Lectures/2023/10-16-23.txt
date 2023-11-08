@@ -1,106 +1,104 @@
-tWeek 8 password: MergeSortQuick
-- Insertion sort
-	- Looping over a list performing insertion of one element at a time (shifting the element)
-		- Shifting has an expected time complexity of O(n)
-	- The shift is performed once per element
-		- Time complexity of n * O(n) or O(n^2)
-
-- Divide and Conquer algorithms
-	- Series that can sort and work more efficiently
-		- Breaking the list into parts (normally 2)
-		- Sorting the parts
-		- Putting the parts back together
+- Testing
+	- The Collatz Conjecture 
+		- For any positive integer, the sequence described by the following mathematical function will always reach N=1
+		- If N is even
+			- F(N) = N/2
+		- If N is odd
+			- 3N + 1
+		- Anything less than 1 is undefined
+			-  ![[collatz conjecture.png]]
+	
+	
+	- Testing
+		- Test Last Development (TLD)
+			- Implement the program's functionality then write the tests for it after
+		- Test Driven Development (TDD)
+			- Common practice
+			- Write the tests first and then implement functionality after
+			- Incrementally, you develop your solution to pass all the tests you previously wrote
+				- ![[test driven development.png]]
+				- Program to be delivered to customer in collatz.py
+					- Known as production code
+	
+				- Test code goes in a separate file
+					- Not intended for customer
+	
+	- Stubbing functions
+		- To write a test that fails, the function has to be stubbed
+		- A stubbed function returns:
+			- A proper function signature that can be called by the tester
+			- A function with a minimum body/code
+				- A docstring
+				- return
+				- pass
+	
+	- Anatomy of a Good Test
+		- Small in nature and tests one thing
+		- Fast and execute quickly
+	
+		- Unit testing
+			- A practice where a developer writes automated tests to make sure a section of the program behaves properly
+	
+	- Steps
+		- Fail
+			- Start with no base case
+			- Test the program to see why it fails
+		- Pass
+			- Implement and/or adjust code into the program so it will pass
+		- Refactor
+			- Simplifies the code
+			- With only one base case, there is no need to refactor the code
+			- ![[refactor1.png]]
+			- Can use loops to to test more values
+			- ![[refactor for loop.png]]
+			- If code is already at simplest form and is extensible to any number of test cases we devise, no need to refactor
 		
+	- Add expected values
+		- ![[testing expected values.png]]
+	
+	- Software testing levels
+		- Developers
+			- Tests individual component
+		- Testers
+			- Tests component groups
+			- Tests integrated system
+		- End users
+			- Test final system
 
-- Merge Sort Algorithm
-	- Divide and conquer algorithm
-	- Splitting the list in half
-	- Splits are merged back in sorted order
-	- Uses slicing to create copies of the elements from the original list
-	- Split until all the lists are size 1
-	- Two lists are merged back and then sorted
-	- Lists are put back sorted
-		- ![[merge sort.png]]
-	- Merge sorting example
-		- ![[merge sort example.png]]
+- Debugging
+	- Syntax errors
+		- The result of using the language incorrectly
+			- Forgetting def keyword when declaring a function
+			- Forgetting a colon after an if condition 
+			- Invoking a misspelled function name 
+			- Forgetting commas between function parameters 
+			- Inconsistent indentation/whitespace
+		- Pycharm underlines errors in red
+	
+	- Runtime errors
+		- An application error that occurs when running program
+			- Using the wrong number of arguments to a function 
+			- Doing arithmetic with incompatible types 
+			- Divide by zero 
+			- Subscripting a string out of bounds
+		- Pycharm prints the traceback to the console
+			- Hotlinks of the errors will jump to the line where the error is in the code
+	
+	- Semantic errors
+		- When a statement is syntactically valid but does not do what the programmer intended
+		- Using < instead of <= in a condition 
+		- “Off by one” errors looping too many/too few time 
+		- Path through a function that returns an incorrect result, or None 
+		- Order of operation mistake
+			- 1 + 5 * 6   vs   (1 + 5) * 6
+	
+	- Debugging
+		- The process of finding and resolving defects, "bugs", in a program that prevents correct operation
+		- Debugger
+			- Allows the programmer to pause the program during execution so it can evaluate the state of the program
+				- Debugging controls
+					- ![[debugger pycharm controls.png]]
+					- ![[debugger controls pycharm 2.png]]
+		- Breakpoints
+			- An intentional stopping or pausing place in a program placed for debugging purposes
 
-- Split
-	- Split step in the merge sort will split the original list into left and right halves and return both lists
-	- Need to return multiple variables, separating each variable by comma
-	- It is possible to return multiple variables 
-		- The values are implicitly packed into a tuple
-	- When calling the function
-		- The values are unpacked from the tuple
-		- ![[split calling multiple variables.png]]
-
-- Merge
-	- Divides the list in half
-	- Checks if the first index in the left is less than the first index in the right
-	- Append() function takes a value and moves it to the end of an existing list
-	- Appends smallest value to list
-	- Checks if second index in the left is less than the first index in the right
-		- ![[merge code.png]]
-
-- Merge sorting odd lists
-	- ![[odd list merge sort.png]]
-
-
-- Merge Sort Complexity
-	- Merge sort complexity: O(nlog₂n)
-		- Divide: Finding the middle (O(1)) then copy array into subarrays (O(1)) until we reach subarrays of size 1. (O(log₂n)): O(1) * O(log₂n)
-	- Conquer (sorting and merging): O(n) * O(log₂n)
-		- Sort each pair of subarrays: O(n)
-		- Merge into one array: O(log₂n)
-	- Total complexity:
-	  - Divide + Conquer:
-	  - O(1) * O(log₂n) + O(n) * O(log₂n) = O(n) * O(log₂n) = O(nlog₂n)
-
-- A different fast sort
-	- Quick sort  
-		- Another divide and conquer algorithm
-		- Pick an element from the list and choose a pivot point
-			- The pivot point is always index 0 in the list
-		- Divide the list into 3 partitions
-		- The resulting partitions contains:
-			- List of elements less than the pivot (smaller list)
-			- List of elements equal to the pivot (equal list)
-			- List of elements more than the pivot (bigger list)
-		- Conquer by sorting the smaller lists and merging them back together in sorted order
-		- ![[quick sort.png]]
-		- Quick sort diagram
-		  - ![[quicksort example.png]]
-		- Quicksort example
-			- ![[quicksort.png]]
-
-- Quicksort complexity
-	- Best case: O(nlogn)
-	- Average case: O(nlogn)
-	- Worst case: O(2**n)
-	- Two main steps:
-		- Partition 
-			- Complexity of partition: O(n)
-		- Merge
-			- Complexity of merge: O(n)
-	- The complexity depends on where the pivot point is
-		- If the pivot point in the middle of the list, that is the best case
-		- If the pivot point is greater than or less than the rest of the data, that is the worst case
-
-- Pivot selection
-	- Index 0 is arbitrarily chosen as the pivot
-	- Other pivots can be chosen too
-		- Last index
-			- len(a_list) - 1
-		- Middle index
-			- len(a_list) // 2
-		- Random index
-			- randrange(len(a_list))
-
-- Complexity money slide
-	- ![[complexity38379709.png]]
-
-- In Place sorting
-	- Moves elements around inside of the array
-	- Python's built-in sorting function sorted()
-		- sorted() uses Timsort
-			- Timsort combines Merge Sort and Insertion Sort
-	- ![[sorted().png]]
