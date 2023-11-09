@@ -9,25 +9,33 @@ import immutable_extra as ie
 import node_types as nt
 
 def convert_to_nodes(dna_string):
-    if not dna_string:
+    if len(dna_string) == 0:
         return None
     else:
-        head = nt.MutableNode(dna_string[0], None)
-        current = head
-        for i in dna_string[1:]:
-            copy = nt.MutableNode(i, None)
-            current.next = copy
-            current = current.next
-        return head
+        node = nt.FrozenNode(dna_string[0], convert_to_nodes(dna_string[1:]))
+    return node
 
 def convert_to_string(dna_seq):
-    pass
+    if not dna_seq:
+        return ""
+    else:
+        return dna_seq.value + convert_to_string(dna_seq.next)
 
 def length_rec(dna_seq):
-    pass
+    if not dna_seq:
+        return 0
+    else:
+        return 1 + length_rec(dna_seq.next)
 
 def is_match(dna_seq1, dna_seq2):
-    pass
+    if dna_seq1 is None and dna_seq2 is None:
+        return True
+    elif dna_seq1 is None or dna_seq2 is None:
+        return False
+    elif dna_seq1.value is not dna_seq2.value:
+        return False
+    else:
+        return is_match(dna_seq1.next, dna_seq2.next)
 
 def is_pairing(dna_seq1, dna_seq2):
     pass
