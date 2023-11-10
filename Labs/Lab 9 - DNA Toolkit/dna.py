@@ -58,9 +58,14 @@ def substitute(dna_seq1, idx, base):
     pass
 
 def insert_seq(dna_seq1, dna_seq2, idx):
-    if idx < 0 or idx > length_rec(dna_seq1):
-        raise IndexError("Index not in range for insertion")
-    return ie.insert_before_index(dna_seq1, dna_seq2, idx)
+    if idx > 0 or dna_seq1 is None:
+        raise IndexError("Invalid insertion index")
+    elif idx == 0:
+        return ie.concatenate(dna_seq1, dna_seq2)
+    else:
+        insert_next = insert_seq(dna_seq1.next, dna_seq2, idx - 1)
+        return nt.FrozenNode(dna_seq1.value, insert_next)
+
 
 def delete_seq(dna_seq, idx, segment_size):
     pass
