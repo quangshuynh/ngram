@@ -38,13 +38,29 @@ def is_match(dna_seq1, dna_seq2):
         return is_match(dna_seq1.next, dna_seq2.next)
 
 def is_pairing(dna_seq1, dna_seq2):
-    pass
+    if dna_seq1 is None and dna_seq2 is None:
+        return True
+    elif dna_seq1 is None or dna_seq2 is None:
+        return False
+    else:
+        current = (
+                dna_seq1.value == 'A' and dna_seq2.value == 'T' or
+                dna_seq1.value == 'T' and dna_seq2.value == 'A' or
+                dna_seq1.value == 'G' and dna_seq2.value == 'C' or
+                dna_seq1.value == 'C' and dna_seq2.value == 'G'
+        )
+        if current:  # Return False if lengths are different
+            return is_pairing(dna_seq1.next, dna_seq2.next)
+        else:
+            return False
 
 def substitute(dna_seq1, idx, base):
     pass
 
 def insert_seq(dna_seq1, dna_seq2, idx):
-    pass
+    if idx < 0 or idx > length_rec(dna_seq1):
+        raise IndexError("Index not in range for insertion")
+    return ie.insert_before_index(dna_seq1, dna_seq2, idx)
 
 def delete_seq(dna_seq, idx, segment_size):
     pass
