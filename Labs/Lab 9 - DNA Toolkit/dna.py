@@ -81,9 +81,9 @@ def is_pairing(dna_seq1, dna_seq2):
                 dna_seq1.value == 'G' and dna_seq2.value == 'C' or
                 dna_seq1.value == 'C' and dna_seq2.value == 'G'
         )
-        if current:  # Return False if lengths are different
+        if current:  # Checks if the end in the sequence is the same length
             return is_pairing(dna_seq1.next, dna_seq2.next)
-        else:
+        else:  # Return False if lengths are different
             return False
 
 
@@ -93,8 +93,8 @@ def substitute(dna_seq1, idx, base):
     :param dna_seq1: The original linked list of a DNA sequence
     :param idx: Index of the substitution
     :param base: The new linked list of a DNA sequence
-    :return: The linked sequence after the substitution mutation
-    :raise: IndexError if idx is out of range.
+    :return: The linked sequence after substitution mutation
+    :raise: IndexError if idx is out of range
     """
     dna_seq1_length = length_rec(dna_seq1)
     if idx < 0 or idx > dna_seq1_length:
@@ -111,12 +111,15 @@ def insert_seq(dna_seq1, dna_seq2, idx):
         :param dna_seq2: The second linked sequence of DNA to be inserted
         :param idx: Index for insertion in dna_seq1
         :return: The linked sequence after the insertion
-        :raise: IndexError if idx is out of range.
+        :raise: IndexError if idx is out of range
         """
     if idx < 0:
         raise IndexError("Invalid insertion index")
     if idx == 0:
-        return ie.concatenate(dna_seq2, dna_seq1)  # Insert at the beginning
+        if dna_seq2 is None:
+            return dna_seq1
+        else:
+            return nt.FrozenNode(dna_seq2.value, insert_seq(dna_seq1, dna_seq2.next, idx))
     elif dna_seq1 is None and idx > 0:
         raise IndexError("Invalid insertion index")
     else:
@@ -125,8 +128,50 @@ def insert_seq(dna_seq1, dna_seq2, idx):
 
 
 def delete_seq(dna_seq, idx, segment_size):
-    pass
+    """
+    Deletes a segment of elements from the DNA sequence
+    :param dna_seq: The linked sequence of DNA for deletion mutation
+    :param idx: Index for deletion
+    :param segment_size: Number of elements to be deleted
+    :return: A new linked sequence representing DNA after deletion
+    :raise: IndexError if combination of idx and segment_size is out of range
+    """
+    if idx < 0 or segment_size < 0:
+        raise IndexError("Invalid deletion index or segment size.")
+    if segment_size == 0:  # If deletion size is 0, return the original sequence
+        return dna_seq
+    seq_length = length_rec(dna_seq)
+    if idx >= seq_length or idx + segment_size > seq_length:
+        raise IndexError("Deletion index and size combination is out of range.")
+    deleted = ie.remove_at(idx, dna_seq)  # Remove segment starting from specified index
+    for i in range(segment_size - 1):  # Loop removal of remaining elements in segment
+        deleted = ie.remove_at(idx, deleted)
+    return deleted
 
 
 def duplicate_seq(dna_seq, idx, segment_size):
-    pass
+    """
+    Duplicates a segment of elements from the DNA sequence
+    :param dna_seq: The linked sequence of DNA for duplication mutation
+    :param idx: Index for duplication
+    :param segment_size: Number of elements to be duplicated
+    :return: A new linked sequence representing DNA after duplication
+    :raise: IndexError if combination of idx and segment_size is out of range
+    """
+    if idx < 0 or segment_size < 0:
+        raise IndexError("Invalid duplication index or segment size.")
+        # If segment size is 0, duplication succeeds by default, return the original sequence
+    if segment_size == 0:
+        return dna_seq
+    seq_length = length_rec(dna_seq)
+    if idx >= seq_length or idx + segment_size > seq_length:
+        raise IndexError("Duplication index and size combination is out of range.")
+    # Extract the segment to duplicate
+    segment_to_duplicate = ie.remove_at(idx, dna_seq)
+    for i in range(segment_size - 1):
+        segment_to_duplicate = ie.remove_at(idx, segment_to_duplicate)
+    # Duplicate the segment using append
+    duplicated_segment = ie.append(segment_to_duplicate, segment_to_duplicate)
+    # Concatenate the duplicated segment back into the original sequence
+    result = ie.concatenate(ie.remove_at(idx, dna_seq), duplicated_segment)
+    return result
