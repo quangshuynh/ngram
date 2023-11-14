@@ -121,7 +121,7 @@ def insert_seq(dna_seq1, dna_seq2, idx):
             return dna_seq1
         else:
             return nt.FrozenNode(dna_seq2.value, insert_seq(dna_seq1, dna_seq2.next, idx))
-    elif dna_seq1 is None:
+    elif dna_seq1 is None and idx > 0:
         raise IndexError("Invalid insertion index")
     else:
         insert_next = insert_seq(dna_seq1.next, dna_seq2, idx - 1)  # Recursively insert into the rest of the sequence
