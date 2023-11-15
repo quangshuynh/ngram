@@ -9,3 +9,5 @@ Practical Exams
 Labs
 
 Lecture/recitation notes
+
+Project
