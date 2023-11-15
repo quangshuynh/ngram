@@ -15,20 +15,21 @@ def readWordFile(fileName):
     :return: Dictionary where each word is a key and associated value is another dictionary. Inner
     dictionary has years as keys and counts as values
     """
-    path = "data/" + fileName  # Add "data/" before filename
+    path = "data/" + str(fileName)  # Add "data/" before filename
     words = {}  # Initialize empty dictionary
     with open(path, "r") as file:
         current_word = None
-        current_data = {}
         for line in file:  # Loop through each line in file
             line = line.strip()  # Remove leading and trailing whitespace
             if line.isalpha():  # Check if the line is a word
-                if current_word != None:
-                    words[current_word] = current_data
+                if current_word is not None:
+                    words[str(current_word)] = current_data
+                current_word = line
+                current_data = {}  # Reset the inner dictionary for each new word
             else:
                 year, count = map(int, line.split(","))
                 current_data[year] = count
-        if current_word != None:
+        if current_word is not None:
             words[current_word] = current_data
     return words
 
