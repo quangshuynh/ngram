@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 
 def letterFreq(words):
     """
-    Computes relative frequency of English characters occurring in print  & plot character counts.
+    Computes relative frequency of English characters occurring in print & plot character counts.
 
     :param words: List of words representing the text for character frequency analysis
 
@@ -20,8 +20,9 @@ def letterFreq(words):
     letter_counts = {}
     for letter in list(letters):  # Count occurrence of each letter
         letter_counts[letter] = letters.count(letter)
+    graph_values = sorted(letter_counts)
     sorted_letters = sorted(letter_counts, key=letter_counts.get, reverse=True)  # In descending order, sort letters by frequency
-    plt.bar(list(sorted_letters), list(letter_counts), color="skyblue")  # Plot character counts
+    plt.bar(list(graph_values), list([letter_counts[letter] for letter in graph_values]), color="skyblue")  # Plot character counts
     plt.show()
     return "".join(sorted_letters)
 
