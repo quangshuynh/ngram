@@ -42,7 +42,7 @@ def length_rec(dna_seq):
     """
     if dna_seq is None:  # Return 0 when at the end of a sequence
         return 0
-    else:  # Recursively add 1 
+    else:  # Recursively add 1
         return length_rec(dna_seq.next) + 1
 
 
@@ -99,7 +99,8 @@ def substitute(dna_seq1, idx, base):
         removed = ie.remove_at(0, dna_seq1)  # Remove the element at the specified index
         return ie.concatenate(nt.FrozenNode(base, None), removed)  # Concatenate the new base at the specified index
     elif dna_seq1 is None:  # Error handle
-        raise IndexError("Invalid insertion index")
+        raise IndexError("Invalid substitution index\n" +
+                         "Index " + str(idx) + " is out of range for substitution")
     else:  # Recursive case
         substituted = substitute(dna_seq1.next, idx - 1, base)
         return nt.FrozenNode(dna_seq1.value, substituted)
@@ -120,9 +121,11 @@ def insert_seq(dna_seq1, dna_seq2, idx):
         else:
             return nt.FrozenNode(dna_seq2.value, insert_seq(dna_seq1, dna_seq2.next, idx))
     if idx < 0:  # Error handle
-        raise IndexError("Invalid insertion index")
+        raise IndexError("Invalid insertion index\n" +
+                         "Index " + str(idx) + " is less than 0")
     elif dna_seq1 is None:  # Error handle
-        raise IndexError("Invalid insertion index")
+        raise IndexError("Invalid insertion index\n" +
+                         "Index " + str(idx) + " is an invalid insertion index")
     elif dna_seq2 is None and idx > 0:  # If dna_seq2 is empty, then continue with dna_seq1
         return nt.FrozenNode(dna_seq1.value, dna_seq1.next)
     else:  # Recursive case
@@ -142,10 +145,15 @@ def delete_seq(dna_seq, idx, segment_size):
     if segment_size == 0:  # If deletion size is 0, return the original sequence
         return dna_seq
     if idx < 0 or segment_size < 0:  # Error handle
-        raise IndexError("Invalid deletion index/segment size.")
+        raise IndexError("Invalid deletion index/segment size.\n" +
+                         "Index " + str(idx) + " or segment size " +
+                         str(segment_size) + " is less than 0")
     seq_length = length_rec(dna_seq)
     if idx >= seq_length or idx + segment_size > seq_length:  # Error handle
-        raise IndexError("Deletion index & size combination out of range.")
+        raise IndexError("Invalid deletion index & size combination.\n" +
+                         "Index " + str(idx) + " is less than " + str(seq_length) +
+                         "\nor" + "\nIndex " + str(idx) + " + " + "segment size " +
+                         str(segment_size) + " is less than " + str(seq_length))
     deleted = ie.remove_at(idx, dna_seq)  # Remove segment starting from specified index
     for i in range(segment_size - 1):  # Loop removal of remaining elements in segment
         deleted = ie.remove_at(idx, deleted)
@@ -165,7 +173,8 @@ def duplicate_seq(dna_seq, idx, segment_size, dup=None):
     if segment_size == 0:  # Base case
         return insert_seq(dna_seq, dup, idx)
     elif dna_seq is None:  # Error handle
-        raise IndexError("Invalid duplication index")
+        raise IndexError("Invalid duplication index\n" +
+                         "Index " + str(idx) + " is an invalid duplication index")
     elif idx == 0:  # If index is 0 and if segment size is not 0
         if segment_size != 0:  # Append the duplicate segment to dup
             appended = duplicate_seq(dna_seq.next, idx, segment_size - 1, ie.append(dup, dna_seq.value))
