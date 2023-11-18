@@ -16,13 +16,13 @@ def letterFreq(words):
     :return: String containing the 26 lowercase characters in the English alphabet, sorted in
     decreasing order of frequency of occurrence of each character.
     """
-    letters = "".join(word.lower() for word in words)
+    letters = "".join(word.lower() for word in words)  # Join lowercase words into a single string
     letter_counts = {}
-    for letter in list(letters):  # Count occurrence of each letter
+    for letter in letters:  # Count occurrence of each letter
         letter_counts[letter] = letters.count(letter)
-    graph_values = sorted(letter_counts)
-    sorted_letters = sorted(letter_counts, key=letter_counts.get, reverse=True)  # In descending order, sort letters by frequency
-    plt.bar(list(graph_values), list([letter_counts[letter] for letter in graph_values]), color="skyblue")  # Plot character counts
+    x_axis = sorted(letter_counts)
+    sorted_letters = sorted(letter_counts, key=letter_counts.get,reverse=True)  # In descending order, sort letters by frequency
+    plt.bar(x_axis, [letter_counts[letter] for letter in x_axis], color="skyblue")  # Plot character counts
     plt.show()
     return "".join(sorted_letters)
 
