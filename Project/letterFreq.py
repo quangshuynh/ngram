@@ -6,6 +6,8 @@ author: Quang Huynh
 """
 
 import matplotlib.pyplot as plt
+import wordData as wd
+
 
 def letterFreq(words):
     """
@@ -16,13 +18,14 @@ def letterFreq(words):
     :return: String containing the 26 lowercase characters in the English alphabet, sorted in
     decreasing order of frequency of occurrence of each character.
     """
-    letters = "".join(word.lower() for word in words)  # Join lowercase words into a single string
-    letter_counts = {}
-    for letter in letters:  # Count occurrence of each letter
-        letter_counts[letter] = letters.count(letter)
-    x_axis = sorted(letter_counts)
-    sorted_letters = sorted(letter_counts, key=letter_counts.get,reverse=True)  # In descending order, sort letters by frequency
-    plt.bar(x_axis, [letter_counts[letter] for letter in x_axis], color="skyblue")  # Plot character counts
+    letter_counts = {}  # Initialize an empty dictionary
+    for word in words:  # Iterate through each word in list
+        count = wd.totalOccurrences(word, words)
+        for letter in word:   # Iterate through each letter in word
+            letter_counts[letter] = letter_counts.get(letter, 0) + count  # If the letter is not present, set count to 0 & add current count.
+    sorted_letter_counts = dict(sorted(letter_counts.items(), key=lambda x: x[1], reverse=True))  # Dictionary containing letter counts in decreasing other
+    sorted_letters = "".join(sorted_letter_counts.keys())  # Add the sorted letters into a single string
+    x_axis = sorted(sorted_letter_counts.keys())  # Alphabet for x-axis
+    plt.bar(x_axis, [sorted_letter_counts[letter] for letter in x_axis], color="skyblue")  # Plot character counts
     plt.show()
-    return "".join(sorted_letters)
-
+    return sorted_letters
