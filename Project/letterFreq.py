@@ -20,7 +20,7 @@ def letterFreq(words):
     """
     letter_counts = {}  # Initialize an empty dictionary
     for word in words:  # Iterate through each word in list
-        count = wd.totalOccurrences(word, words)
+        count = wd.totalOccurrences(word, words)  # Total number of occurrences
         for letter in word:   # Iterate through each letter in word
             letter_counts[letter] = letter_counts.get(letter, 0) + count  # If the letter is not present, set count to 0 & add current count.
     sorted_letter_counts = dict(sorted(letter_counts.items(), key=lambda x: x[1], reverse=True))  # Dictionary containing letter counts in decreasing other
