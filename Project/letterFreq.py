@@ -18,7 +18,7 @@ def letterFreq(words):
     :return: String containing the 26 lowercase characters in the English alphabet, sorted in
     decreasing order of frequency of occurrence of each character.
     """
-    letter_counts = {}  # Initialize an empty dictionary
+    letter_counts = {}  # Initialize empty dictionary
     for word in words:  # Iterate through each word in list
         count = wd.totalOccurrences(word, words)  # Total number of occurrences
         for letter in word:   # Iterate through each letter in word
