@@ -6,3 +6,11 @@ file: wordSimilarity.py
 language: python3
 author: Quang Huynh
 """
+
+def topSimilar(words, word):
+    """
+    pass
+    :param words:
+    :param word:
+    :return:
+    """
