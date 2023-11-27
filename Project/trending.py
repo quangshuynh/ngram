@@ -14,7 +14,6 @@ def trending(words, startYr, endYr):
     :param endYr: End year for calculating trending words
     :return: A list of tuples containing the word and its trend value
     """
-
     trending_words = []  # Initialize empty list
     for word, counts in words.items():  # Iterate through input dictionary of words & counts
         starting_count = counts.get(startYr, 0)  # Get count for starting year, set to 0 if not present
