@@ -56,4 +56,34 @@ def topSimilar(words, word):
     top_similar_words = sorted(similar_words, key=similar_words.get, reverse=True)[:5]  # Ends at the fifth word
     return top_similar_words  # Returns top five similar words in descending order
 
+# Testing time
+
+if __name__ == "__main__":
+    import time
+    import wordData as wd
+
+
+    def test(result, expected):
+        if result == expected:
+            print("Success")
+            return True
+        else:
+            print("Result: " + str(result) + "\nExpected" + str(expected))
+            return False
+
+    def testFile(filename, word, expected):
+        file = wd.readWordFile(filename)
+        return test(topSimilar(file, word), expected)
+
+    def testing():
+        start = time.perf_counter()
+        passed = True
+        passed = testFile("all.txt", "robot", ["robot", "robots", "robotics", "neuroendocrine", "programmable"]) and passed
+        print()
+        result = "all.txt success" if passed else "all.txt failed"
+        print(str(result))
+        print(time.perf_counter() - start)
+
+    testing()
+
 
