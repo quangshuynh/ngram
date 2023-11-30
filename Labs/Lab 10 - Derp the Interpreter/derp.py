@@ -16,6 +16,25 @@ Author: Quang Huynh
 from derp_types import *        # dataclasses for the Derp interpreter
 
 
+def read_symbol_table(fileName):
+    symbol_table = {}
+    try:
+        with open(fileName, "r") as file:
+            for line in file:
+                parts = line.split()
+                if len(parts) == 2:
+                    variable_name, value_str = parts
+                    try:
+                        value = int(value_str)
+                        symbol_table[variable_name] = value
+                    except ValueError:
+                        raise ValueError("Invalid value for variable " + variable_name + ":" + value_str)
+                else:
+                    raise ValueError("Invalid line format: " + line)
+    except FileNotFoundError:
+        raise FileNotFoundError("File not found: " + fileName)
+    return symbol_table
+
 ##############################################################################
 # parse
 ############################################################################## 
@@ -29,11 +48,11 @@ def parse(tokens):
     if not tokens:
         return None
     token = tokens.pop(0)
-    if token.isdigit() or (token[0] == '-' and token[1:].isdigit()):
+    if token.isdigit() or (token[1:].isdigit() and token[0] == "-"):
         return LiteralNode(token)
     elif token.isalpha():
         return VariableNode(token)
-    elif token in ['+', '-', '*', '//']:
+    elif token in ["+", "-", "*", "//"]:
         left = parse(tokens)
         right = parse(tokens)
         return MathNode(left, token, right)
@@ -55,9 +74,9 @@ def infix(node):
     elif isinstance(node, VariableNode):
         return node.name
     elif isinstance(node, MathNode):
-        left_str = infix(node.left)
-        right_str = infix(node.right)
-        return str(left_str + node.operator + right_str)
+        left = infix(node.left)  # Left string
+        right = infix(node.right)  # Right string
+        return str("(" + left + " " + node.operator + " " + right + ")")
     else:
         raise ValueError("Invalid node type: " + str(type(node)))
  
@@ -71,7 +90,7 @@ def evaluate(node, sym_tbl):
     Precondition: all variable names must exist in sym_tbl
     precondition: node is a valid derp tree node
     """
-    
+
     pass
     
 ##############################################################################
@@ -89,6 +108,11 @@ def main():
     in_file = input("Herp, enter symbol table file: ")
     
     # STUDENT: CONSTRUCT AND DISPLAY THE SYMBOL TABLE HERE
+    symbol_table = read_symbol_table(in_file)
+    print("\nDerping the symbol table (variable name => integer value)...")
+    for variable, value in symbol_table.items():
+        print(variable + " => " + str(value))
+    print("")
     
     print("Herp, enter prefix expressions, e.g.: + 10 20 (ENTER to quit)...")
     
@@ -100,17 +124,20 @@ def main():
             break
             
         # STUDENT: GENERATE A LIST OF TOKENS FROM THE PREFIX EXPRESSION
+        tokens_list = prefix_exp.split()
         
         # STUDENT: CALL parse WITH THE LIST OF TOKENS AND SAVE THE ROOT OF 
         # THE PARSE TREE.
+        parse_tree = parse(tokens_list)
             
         # STUDENT: GENERATE THE INFIX EXPRESSION BY CALLING infix AND SAVING
         # THE STRING.
+        infix_expression = infix(parse_tree)
 
         # STUDENT: MODIFY THE print STATEMENT TO INCLUDE RESULT.    
-        print("Derping the infix expression:")
+        print("Derping the infix expression: " + infix_expression)
         
-        # STUDENT: EVALUTE THE PARSE TREE BY CALLING evaluate AND SAVING THE
+        # STUDENT: EVALUATE THE PARSE TREE BY CALLING evaluate AND SAVING THE
         # INTEGER RESULT.
 
         # STUDENT: MODIFY THE print STATEMENT TO INCLUDE RESULT.
