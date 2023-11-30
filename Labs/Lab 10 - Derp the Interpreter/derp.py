@@ -90,8 +90,31 @@ def evaluate(node, sym_tbl):
     Precondition: all variable names must exist in sym_tbl
     precondition: node is a valid derp tree node
     """
-
-    pass
+    if isinstance(node, LiteralNode):
+        return int(node.val)
+    elif isinstance(node, VariableNode):
+        if node.name in sym_tbl:
+            return sym_tbl[node.name]
+        else:
+            raise ValueError("Undefined variable: " + node.name)
+    elif isinstance(node, MathNode):
+        left_val = evaluate(node.left, sym_tbl)
+        right_val = evaluate(node.right, sym_tbl)
+        if node.operator == '+':
+            return left_val + right_val
+        elif node.operator == '-':
+            return left_val - right_val
+        elif node.operator == '*':
+            return left_val * right_val
+        elif node.operator == '//':
+            if right_val != 0:
+                return left_val // right_val
+            else:
+                raise ValueError("Division by zero")
+        else:
+            raise ValueError("Invalid operator: " + node.operator)
+    else:
+        raise ValueError("Invalid node type: " + str(type(node)))
     
 ##############################################################################
 # main
@@ -139,9 +162,10 @@ def main():
         
         # STUDENT: EVALUATE THE PARSE TREE BY CALLING evaluate AND SAVING THE
         # INTEGER RESULT.
+        evaluation = evaluate(parse_tree, symbol_table)
 
         # STUDENT: MODIFY THE print STATEMENT TO INCLUDE RESULT.
-        print("Derping the evaluation:")
+        print("Derping the evaluation: " + str(evaluation) + "\n")
          
     print("Goodbye Herp :(")
     
