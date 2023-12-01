@@ -5,6 +5,7 @@ language: python3
 author: Quang Huynh
 """
 
+
 def readWordFile(fileName):
     """
     Reads unigram data files and returns a dictionary mapping words to dictionaries.
@@ -42,14 +43,17 @@ def totalOccurrences(word, words):
     if word in words:  # Check if the word is in the words dictionary
         return sum(words[word].values())  # If the word is present, sum the counts for all years
     else:
-        return 0   # If the word is not present, return 0
+        return 0  # If the word is not present, return 0
 
 
 # Standalone execution
 def main():
-    words = input("Enter word file: ")
-    word = input("Enter word: ")
-    print("Total occurences of airport: " + totalOccurrences(word, words))
+    file = input("Enter word file: ")  # Name of file
+    words = readWordFile(file)  # Make dictionary
+    word = input("Enter word: ")  # Word to be checked
+    print("Total occurrences of airport: " + str(totalOccurrences(word, words)))  # Print number of times word appears
 
+
+# Main guard
 if __name__ == "__main__":
     main()
