@@ -6,16 +6,18 @@ author: Quang Huynh
 """
 
 import matplotlib.pyplot as plt
+import wordData as wd
+
 
 def printedWords(words):
     """
-    Calculate the total word count for each year with available data
+    Make a list of for the total count of words each year
     :param words: List of words representing the text for character frequency analysis
     :return: A sorted list containing a year and its corresponding total word count
     """
     year_counts = {}  # Initialize empty dictionary
-    for word, data in words.items():  # Iterate through input dictionary of words & data
-        for year, count in data.items():  # Iterate through data dictionary for each word
+    for word, info in words.items():  # Iterate through & return input dictionary of words & data
+        for year, count in info.items():  # Iterate through & return "info" dictionary value of each word
             if year in year_counts:  # Checks if year is in year_counts
                 year_counts[year] += count  # Add word count to current year total
             else:  # If year is not in year_counts
@@ -25,6 +27,7 @@ def printedWords(words):
     plt.show()
     total_words = sorted(year_counts.items())  # Sorted word counts
     return total_words
+
 
 def wordsForYear(year, yearList):
     """
@@ -38,3 +41,17 @@ def wordsForYear(year, yearList):
             return count
     return 0  # Return 0 if target year is not found in list
 
+
+# Standalone execution
+def main():
+    file = input("Enter word file: ")  # Name of file
+    year = str(input("Enter year: "))  # Year to check
+    words = wd.readWordFile(file)  # Make dictionary
+    words_list = printedWords(words)  # Make list
+    count_for_year = str(wordsForYear(int(year), words_list))  # Count words for specified year
+    print("Total printed words for " + year + ": " + count_for_year)  # Print amount of words for specified year
+
+
+# Main guard
+if __name__ == "__main__":
+    main()
