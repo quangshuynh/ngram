@@ -33,12 +33,10 @@ def main():
     start = input("Enter starting year: ")
     end = input("Enter ending year: ")
     trending_words = trending(words, start, end)
-    print("The top 10 trending words from " + str(start) + " to " + str(end) + ": ")
-    for idx in range(min(10, len(trending_words))):
-        print(trending_words[idx])
-    print("The bottom 10 trending words from " + str(start) + " to " + str(end) + ": ")
-    for idx in range(max(-10, -len(trending_words)), 0):
-        print(trending_words[idx])
+    top_trending = list(trending_words[idx][0] for idx in range(10))
+    bottom_trending = list(trending_words[idx][0] for idx in range(-1, -11, -1))
+    print("The top 10 trending words from " + str(start) + " to " + str(end) + ": \n" + str(top_trending) + "\n")
+    print("The bottom 10 trending words from " + str(start) + " to " + str(end) + ": \n" + str(bottom_trending))
 
 
 if __name__ == "__main__":
