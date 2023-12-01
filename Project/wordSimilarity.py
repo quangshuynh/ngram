@@ -60,11 +60,12 @@ def topSimilar(words, word):
 
 # Standalone execution
 def main():
-    file = input("Enter word file: ")
-    words = wd.readWordFile(file)
-    word = input("Enter word: ")
-    print("The most similar words are: \n" + str(topSimilar(words, word)))
+    file = input("Enter word file: ")  # Name of file
+    words = wd.readWordFile(file)  # Make dictionary 
+    word = input("Enter word: ")  # Input word to calculate similarity to 
+    print("The most similar words are: \n" + str(topSimilar(words, word)))  # Print top 5 similar words
 
 
+# Main guard
 if __name__ == "__main__":
     main()
