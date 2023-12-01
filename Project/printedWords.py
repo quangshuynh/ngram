@@ -11,7 +11,7 @@ import wordData as wd
 
 def printedWords(words):
     """
-    Make a list of for the total count of words each year
+    Make a list of for the total count of words each year from a dictionary
     :param words: List of words representing the text for character frequency analysis
     :return: A sorted list containing a year and its corresponding total word count
     """
