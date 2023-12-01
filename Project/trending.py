@@ -5,6 +5,7 @@ language: python3
 author: Quang Huynh
 """
 
+import wordData as wd
 
 def trending(words, startYr, endYr):
     """
@@ -15,7 +16,7 @@ def trending(words, startYr, endYr):
     :return: A list of tuples containing the word and its trend value
     """
     trending_words = []  # Initialize empty list
-    for word, counts in words.items():  # Iterate through input dictionary of words & counts
+    for word, counts in words.items():  # Iterate through & return input dictionary of words & counts
         starting_count = counts.get(startYr, 0)  # Get count for starting year, set to 0 if not present
         end_count = counts.get(endYr, 0)  # Get count for end year, set to 0 if not present
         if starting_count >= 1000 and end_count >= 1000:  # Check if the word meets the requirements
@@ -23,3 +24,18 @@ def trending(words, startYr, endYr):
             trending_words.append((word, trend_value))  # Append word & its trend value to list
     trending_words.sort(key=lambda x: x[1], reverse=True)  # Sort the list in decreasing order of trend value
     return trending_words
+
+
+# Standalone execution
+def main():
+    file = input("Enter word file: ")
+    words = wd.readWordFile(file)
+    start = input("Enter starting year: ")
+    end = input("Enter ending year: ")
+    trending_words = trending(words, start, end)
+    print("The top 10 trending words from " + str(start) + " to " + str(end) + ": ")
+    
+
+
+if __name__ == "__main__":
+    main()
