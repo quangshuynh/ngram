@@ -8,10 +8,8 @@ author: Quang Huynh
 def readWordFile(fileName):
     """
     Reads unigram data files and returns a dictionary mapping words to dictionaries.
-
     :param fileName: String that gives the name of unigram data files. Should not include 'data/',
     only the name of the file inside the data folder
-
     :return: Dictionary where each word is a key and associated value is another dictionary. Inner
     dictionary has years as keys and counts as values
     """
@@ -46,3 +44,12 @@ def totalOccurrences(word, words):
     else:
         return 0   # If the word is not present, return 0
 
+
+# Standalone execution
+def main():
+    words = input("Enter word file: ")
+    word = input("Enter word: ")
+    print("Total occurences of airport: " + totalOccurrences(word, words))
+
+if __name__ == "__main__":
+    main()
