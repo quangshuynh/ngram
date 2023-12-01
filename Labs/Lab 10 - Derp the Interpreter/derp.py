@@ -55,8 +55,8 @@ def parse(tokens):
     as a collection of Nodes, that represent the expression.
     precondition: tokens is a non-empty list of strings
     :param tokens: List of strings
-    :return: Left, root & right nodes of an expression tree
-    :raises ValueError: If invalid token is encountered during parsing
+    :return: A valid derp tree node
+    :raises ValueError: If invalid token format
     """
     token = tokens.pop(0)  # Pop first token from list
     if token.isdigit() or (token == "-" and token[:1].isdigit()):  # Check if token is digit or a negative
@@ -80,9 +80,9 @@ def infix(node):
     Perform an inorder traversal of the node and return a string that
     represents the infix expression.
     precondition: node is a valid derp tree node
-    :param node: Nodes of the DERP tree
+    :param node: A valid derp tree node
     :return: A string representing infix expression
-    :raises ValueError: If invalid node type is encountered
+    :raises ValueError: If node type is invalid
     """
     if isinstance(node, LiteralNode):  # Values
         return str(node.val)
@@ -105,10 +105,10 @@ def evaluate(node, sym_tbl):
     Return the result of evaluating the expression represented by node.
     Precondition: all variable names must exist in sym_tbl
     precondition: node is a valid derp tree node
-    :param node: Nodes of the DERP tree
+    :param node: A valid derp tree node
     :param sym_tbl: Dictionary containing variables and corresponding values
     :return: Result of expression evaluation
-    :raises ValueError: If there are issues with variables, operators, or division by zero
+    :raises ValueError: If there are issues with variables, operators or division by zero
     """
     if isinstance(node, LiteralNode):  # Values
         return int(node.val)
