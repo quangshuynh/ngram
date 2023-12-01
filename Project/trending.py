@@ -28,16 +28,25 @@ def trending(words, startYr, endYr):
 
 # Standalone execution
 def main():
-    file = input("Enter word file: ")
-    words = wd.readWordFile(file)
-    start = input("Enter starting year: ")
-    end = input("Enter ending year: ")
-    trending_words = trending(words, start, end)
-    top_trending = list(trending_words[idx][0] for idx in range(10))
-    bottom_trending = list(trending_words[idx][0] for idx in range(-1, -11, -1))
-    print("The top 10 trending words from " + str(start) + " to " + str(end) + ": \n" + str(top_trending) + "\n")
-    print("The bottom 10 trending words from " + str(start) + " to " + str(end) + ": \n" + str(bottom_trending))
+    file = input("Enter word file: ")  # File name
+    words = wd.readWordFile(file)  # Make dictionary
+    start = str(int(input("Enter starting year: ")))  # Starting year
+    end = str(int(input("Enter ending year: ")))  # Ending year
+    trending_words = trending(words, start, end)  # Calculate trends for inbetween start & end year
 
+    # Make top 10 trending words
+    top_trend = list(trending_words[idx][0] for idx in range(min(10, len(trending_words))))
 
+    # Make top 10 lowest trending words
+    bottom_trend = list(trending_words[idx][0] for idx in range(-1, -11, -1) if idx >= -len(trending_words))  
+
+    # Print top 10 trending words inbetween start & end year
+    print("The top 10 trending words from " + start + " to " + end + ":\n" + "\n".join(map(str, top_trend)) + "\n")
+
+    # Print top 10 lowest trending words inbetween start & end year
+    print("The top 10 trending words from " + start + " to " + end + ":\n" + "\n".join(map(str, bottom_trend)) + "\n")  
+    
+
+# Main guard
 if __name__ == "__main__":
     main()
