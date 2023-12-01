@@ -8,13 +8,10 @@ author: Quang Huynh
 import matplotlib.pyplot as plt
 import wordData as wd
 
-
 def letterFreq(words):
     """
     Computes relative frequency of English characters occurring in print & plot character counts.
-
     :param words: List of words representing the text for character frequency analysis
-
     :return: String containing the 26 lowercase characters in the English alphabet, sorted in
     decreasing order of frequency of occurrence of each character.
     """
@@ -29,3 +26,14 @@ def letterFreq(words):
     plt.bar(x_axis, [sorted_letter_counts[letter] for letter in x_axis], color="skyblue")  # Plot character counts
     plt.show()
     return sorted_letters
+
+
+# Standalone execution
+def main():
+    file = input("Enter word file: ")
+    words = wd.readWordFile(file)
+    print("Letters sorted by decreasing frequency " + letterFreq(words))
+
+
+if __name__ == "__main__":
+    main()
