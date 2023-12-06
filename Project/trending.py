@@ -28,6 +28,11 @@ def trending(words, startYr, endYr):
 
 # Standalone execution
 def main():
+    """
+    Standalone execution for trending.py. Asks for name of word file, starting year & ending year, makes dictionary
+    from the data in the file, calculates & prints the top 10 trending and bottom 10 trending words within a
+    specified range of years
+    """
     file = input("Enter word file: ")  # File name
     words = wd.readWordFile(file)  # Make dictionary
     start = input("Enter starting year: ")  # Starting year
