@@ -20,7 +20,7 @@ def readWordFile(fileName):
         current_word = None
         for line in file:  # Loop through each line in file
             line = line.strip()  # Remove leading and trailing whitespace
-            if line.isalpha():  # Check if the line is a word
+            if line.isidentifier():  # Check if the line is a word
                 if current_word is not None:
                     words[str(current_word)] = current_data
                 current_word = line
@@ -48,6 +48,10 @@ def totalOccurrences(word, words):
 
 # Standalone execution
 def main():
+    """
+    Standalone execution for wordData.py. Asks for name of word file, makes dictionary from the data in the file,
+    asks for a word and prints the number of occurrences of inputted word from the file
+    """
     file = input("Enter word file: ")  # Name of file
     words = readWordFile(file)  # Make dictionary
     word = input("Enter word: ")  # Word to be checked
