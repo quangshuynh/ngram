@@ -30,6 +30,10 @@ def letterFreq(words):
 
 # Standalone execution
 def main():
+    """
+    Standalone execution for letterFreq.py. Asks for name of word file, makes dictionary from the data in the files
+    and prints the letters sorted by decreasing frequency based on the contents of the file
+    """
     file = input("Enter word file: ")  # Name of file
     words = wd.readWordFile(file)  # Make dictionary
     print("Letters sorted by decreasing frequency " + letterFreq(words))  # Find frequency of each letter
