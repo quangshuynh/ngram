@@ -44,6 +44,11 @@ def wordsForYear(year, yearList):
 
 # Standalone execution
 def main():
+    """
+    Standalone execution for printedWords.py. Asks for name of word file & year, makes dictionary from the data in
+    the file, reads the file to create a dictionary, makes a list of printed words, counts the occurrences of
+    words for the specified year, and prints the total count of printed words for that year
+    """
     file = input("Enter word file: ")  # Name of file
     year = str(input("Enter year: "))  # Year to check
     words = wd.readWordFile(file)  # Make dictionary
