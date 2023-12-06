@@ -59,6 +59,10 @@ def topSimilar(words, word):
 
 # Standalone execution
 def main():
+    """
+    Standalone execution for wordSimilarity.py. Asks for name of word file, makes dictionary from the data in the file,
+    asks for a word and prints the most similar words of inputted word from the file
+    """
     file = input("Enter word file: ")  # Name of file
     words = wd.readWordFile(file)  # Make dictionary
     word = input("Enter word: ")  # Input word to calculate similarity to
