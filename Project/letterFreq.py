@@ -24,7 +24,6 @@ def letterFreq(words):
     sorted_letters = "".join(sorted_letter_counts.keys())  # Add the sorted letters into a single string
     x_axis = sorted(sorted_letter_counts.keys())  # Alphabet for x-axis
     plt.bar(x_axis, [sorted_letter_counts[letter] for letter in x_axis], color="skyblue")  # Plot character counts
-    plt.show()
     return sorted_letters
 
 
@@ -37,6 +36,7 @@ def main():
     file = input("Enter word file: ")  # Name of file
     words = wd.readWordFile(file)  # Make dictionary
     print("Letters sorted by decreasing frequency " + letterFreq(words))  # Find frequency of each letter
+    plt.show()
 
 
 # Main guard
