@@ -24,7 +24,6 @@ def printedWords(words):
                 year_counts[year] = count  # Initialize total word count for year
     x_axis = sorted(year_counts.keys())  # Years for x-axis
     plt.plot(x_axis, [year_counts[year] for year in x_axis])  # Plot total printed words for each year
-    plt.show()
     total_words = sorted(year_counts.items())  # Sorted word counts
     return total_words
 
@@ -53,6 +52,7 @@ def main():
     year = str(input("Enter year: "))  # Year to check
     words = wd.readWordFile(file)  # Make dictionary
     words_list = printedWords(words)  # Make list
+    plt.show()
     count_for_year = str(wordsForYear(int(year), words_list))  # Count words for specified year
     print("Total printed words for " + year + ": " + count_for_year)  # Print amount of words for specified year
 
