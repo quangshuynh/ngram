@@ -1,0 +1,86 @@
+- Frozen Node structure
+	- ![[Pasted image 20231108072711.png]]
+
+- Immutable linked structure
+	- We can chain together FrozenNodes to create an immutable linked structure
+		- ![[Pasted image 20231108072809.png]]
+	- Because the list is immutable, the only way to change the linked structure is to create new sequences of frozen nodes
+	- We will perform all operations on immutable lists recursively (not iteratively with a loop)
+
+- Immutable Linked Structure: Append
+	- ![[Pasted image 20231108072932.png]]
+
+- Linked Structure: Insert before Index
+	- ![[Pasted image 20231108072951.png]]
+
+- MutableNode Structure
+	- ![[Pasted image 20231108073357.png]]
+
+- MutableNode Structure: LinkedList
+	- We can encapsulate the head and size into a mutable LinkedList structure
+		- ![[Pasted image 20231108073433.png]]
+	- We can add a maker function to build an empty mutable list
+		- ![[Pasted image 20231108073505.png]]
+
+- Mutable Linked Structure
+	- We will perform all operations on mutable lists using iterative loops (not recursion)
+		- ![[Pasted image 20231108073632.png]]
+
+- Mutable Linked Structure: To String
+	- ![[Pasted image 20231108073722.png]]
+
+- Mutable Linked Structure: Remove Value
+	- Removing a value from at the head of the list
+		- ![[Pasted image 20231108073752.png]]
+	- Removing a value from non-head of the list
+		- ![[Pasted image 20231108073844.png]]
+
+- Linked Structure: Performance
+	- Performance of the linked structure operations
+		- Access element by index: O(N)
+			- Worst case: Accessing the last element
+		- Append an element to the end: O(N)
+		- Insert element at the front O(1)
+			- Takes constant time to create and link a new node at the front
+		- Insert before index: O(N)
+		- Creating a string representation of a list: O(N)
+		- Remove by value: O(N)
+
+- Array list
+	- Python's list is an array based implementation
+		- Elements are stored contiguously in memory
+		- The array list maintains
+			- A size (current number of elements)
+			- A capacity (how many elements can be stored)
+				- ![[Pasted image 20231108074242.png]]
+
+- Array list: Performance
+	- Access element by index: O(1)
+		- ![[Pasted image 20231108074348.png]]
+	- Append element to end: O(1)
+		- ![[Pasted image 20231108074357.png]]
+	- Insert element at the front: O(N)
+		- ![[Pasted image 20231108074408.png]]
+
+
+Initial quiz:
+1. ![[Pasted image 20231108074836.png]]
+
+2. 
+	- size(head) = 1 + size("b")
+	- = 1 + (1 + size("c"))
+	- = 1 + (1 + (1 + size("d")))
+	- = 1 + (1 + (1 + (1 + None)))
+	- = 1 + (1 + (1 + (1 + 0)))
+	- = 4
+
+3. 
+	- The FrozenNode dataclass fields are value and next, FrozenNode(value, next). So to fix the problem, you have to make a variable for that value and make go to the value in the parameters.
+	- front = FrozenNode(20, None)
+	- front1 = FrozenNode(10, front)
+
+4. 
+	- mystery(node) checks for even node values and a recursive FrozenNode is returned
+
+5. 
+	- mystery(lst, new_value, index) adds a new value to a non-head of a list in a Mutable Linked 
