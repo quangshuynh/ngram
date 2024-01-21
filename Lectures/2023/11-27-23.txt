@@ -1,0 +1,192 @@
+- Quiz password: Timber
+
+- Gotta catch them all
+	- Pokemon trainers use a Pokedex to keep track of the Pokemon that they have captured
+	- When encountering a Pokemon in the wild, it's important for a trainer to know whether or not they have already captured that species
+	- In order to implement the Pokedex, we will need a data structure that meets the following requirements:
+		- **Quickly search** to determine whether or not a specific Pokemon is already in the collection
+		- **Print** all the Pokemon in our Pokedex **in order by number**
+	- What is the best data structure to use to meet both of those requirements?: List 
+
+- The Pokedex as a List
+	- Simply add each Pokémon to the end of a list as it is captured
+		- Constant time - O(C)
+	- Determining whether or not a specific Pokemon is captured
+		- Perform a linear search - O(N)
+	- Complexity of maintaining Pokedex over time
+		- Each time a Pokemon is encountered, a linear search is performed - O(N)
+		- Complexity over time - O(N²)
+	- Printing the Pokemon in order
+		- Search the list for Pokemon with the next smallest number
+		- To print N Pokemon, N linear searches must be performed -  O(N²)
+	- There is probably a better way
+
+- The Pokedex as a Sorted List
+	- Sort the list each time a new Pokemon is added
+	- This will allows performing a binary search to determine whether or not a Pokemon is already captured
+		- O(logN)
+	- Complexity of searching Pokedex overtime
+		- Each time a Pokemon is encountered, a binary search is performed - O(logN)
+		- Complexity over time - O(NlogN)
+	- Printing the Pokemon in order
+		- Iterating over the list - O(N)
+	- Complexity of keeping list sorted
+		- Inserting Pokemon - O(N)
+		- Will need to perfrom insert N times - O(N²)
+
+- The Pokedex as a Dictionary
+	- Why not use a dictionary to keep track of your captured Pokemon
+		- Use the Pokemon's number as the key
+	- Adding Pokemon
+		- Constant time - O(C)
+	- Searching Pokemon
+		- Constant time - O(C)
+	- Printing the pokemon in order
+		- Dictionaries do not maintain keys in predictable order
+		- Have to iterate over keys looking for Pokemon with next smallest number - O(N)
+			- Print N Pokemon & do linear search N times - O(N²)
+		- Alternatively, all the Pokemon could be copied into a list and be sorted - O(N + NlogN)
+
+- Pokedex options
+	- Let's look at the data structures we already know and consider the complexity to:
+		- Add a Pokemon to the Pokedex
+		- Determine if a Pokemon is already in the Pokedex
+		- Add N Pokemon to the Pokedex
+		- Print the Pokedex in order
+			- ![[Pasted image 20231127080235.png]]
+
+- Binary Trees
+	- A binary tree is one of two things
+		- An empty tree
+			- A tree with no data & no sub-trees
+			- Empty tree is represented using null
+		- A non-empty tree
+			- Includes a value and a left subtree & right subtree, either or both of which may be empty
+
+- Parts of a Binary Tree
+	- Node
+		- A non-empty tree has at least one node
+		- In diagrams, a node is represented as a circle
+		- The value is written inside the circle
+		- The subtrees are indicated using arrows
+	- Leaf
+		- A node whose left & right subtrees are both empty
+		- Arrows are not drawn for empty subtrees
+		- These subtrees may also be referred to as empty nodes & are represented using null
+	- Internal node
+		- A node that is not a leaf
+		- One or both of its subtrees is not an empty tree
+	- Child
+		- A child node (n꜀) is a child of parent node (nₚ) when child node is in the left or right subtree of nₚ
+			- In this example, node 6 is the child of node 7 because node 6 is in the left subtree
+			- Node 9 is also a child of node 7 because node 9 is in the right subtree of node 7
+				- ![[Pasted image 20231127081216.png]]
+	- Parent
+		- A parent node (nₚ) is a parent of a child node (n꜀), if the child node is a subtree of the parent node
+			- In this example, node 5 is the parent node of node 7 (right subtree of node 5) & node 3 (left subtree of node 5)
+				- ![[Pasted image 20231127081434.png]]
+	- Root node
+		- A node that has no parent
+			- In this example, node 5 is the root node because it has no parent
+			- There is only one root node in a binary tree
+				- ![[Pasted image 20231127081523.png]]
+
+- Size, height, imbalance
+	- Size: How many nodes are in the tree
+	- Height: Length of longest branch (count edges)
+	- Imbalance: Longest branch - shortest branch
+		- In this example:
+			- Size: 9
+			- Height: 3
+			- Imbalance: 1
+				- ![[Pasted image 20231127081644.png]]
+
+- Printing the Pokedex
+	- The next part of the Pokedex problem is to print all of the Pokedex in the Pokedex by number
+	- This will requires us to stringify the binary tree that implements our Pokedex
+		- "Stringify" is a technical term that refers to making a string from the values in the tree
+	- Converting a binary tree into a string requires that we:
+		- **Visit** each node in the tree
+		- Add its value to a string using **concatenation**
+	- The process of visiting each node in a tree is also referred to as traversing the tree
+
+- Infix (in-order) traversal
+	- There is more than one way in which to traverse a binary tree; the order in which the nodes are visited, and therefore the results, may change
+	- In this example, if you wanted to print all the node values in increasing numerical order, the order to visit each node:
+		- Left subtree
+		- Middle node
+		- Right subtree
+			- ![[Pasted image 20231127083425.png]]
+	- This is called an infix traversal or in-order traversal
+		- The nodes are always visited in the order: Left-middle-right
+
+- Traversal orders
+	- Pre-order:
+		- Parent node
+		- Left subtree
+		- Right subtree
+	- In-order
+		- Left subtree
+		- Parent node
+		- Right subtree
+	- Post-order
+		- Left subtree
+		- Right subtree
+		- Parent node
+	- Example:
+		- Pre-order: A, B, D, C, E, G, F, H, I 
+		- In-order: B, D, A, G, E, C, H, F, I
+		- Post-order: D, B, G, E, H, I, F, C, A
+			  ![[Pasted image 20231127083617.png]]
+
+- Searching a Binary Tree
+	- Once the values are added to a binary tree, how would we **search** the tree to determine whether or not it contains a specific value?
+	- Binary trees are a recursive data structure, so it should come as no surprise that a recursive algorithm can be used to search a binary tree **BT**
+		- If *value* matches the target, return *true*
+		- Otherwise, if the **left subtree** is not *null*, search it. If target is found, return *true*
+		- Otherwise, if the **right subtree** is not *null*, search it. If target is found, return *true*
+		- Otherwise, return *false*
+	- Determining whether or not a value is present in a binary tree requires a search
+	- If target is not in the root node, search one of the subtrees
+	- If the target still is not found, search the other subtree
+		- ![[Pasted image 20231127085945.png]]
+
+ - Search complexity
+	 - What is the average complexity of searching a binary tree with N nodes?
+		 - On average, about **half** of the nodes will need to be searched so O(0.5N) or just O(N)
+	- This is no better than **linear search**! Is there a way that we can improve the efficiency of searching a binary tree?
+	- A **binary search** runs in logarithmic time O(logN) because it eliminates half of the values with each iteration; it chooses to search only the left half or the right half of an array
+	- Is there a way to arrange values in a binary tree to accomplish the same thing?
+	- A binary tree is any tree with the structure described previously
+	- Each node has two children: a left subtree & a right subtree
+	- No relationship between the data in the nodes
+	- ![[Pasted image 20231127090318.png]]
+
+- Binary Search Trees (BSTs)
+	- Assuming that the values in a binary tree can be arranged into some natural order, we can build the tree so that it is more efficiently searchable
+	- Each time a new value is added to the tree:
+		- If the new value comes **before** the root's value in natural order, then it is added to the **left subtree**
+		- If the new value comes **after** the root's value in natural order, then it is added to the **right subtree**
+	- The process continues recursively through each node in the tree until an **empty subtree** is found
+		- The new value is added in place of the empty subtree
+	- A binary search tree (BST) is a special binary tree
+	- From any node in the tree, the left subtree contains only values that come before ... and the right subtree contains only values that come after
+		- ![[Pasted image 20231127090619.png]]
+
+- Identifying Binary Search Trees
+	- This is not a Binary Search Tree because the values do not come right before
+		- ![[Pasted image 20231127090850.png]]
+
+- Inserting into the Pokedex
+	- So now that we know that we can implement the Pokedex using a **binary search tree**, how do we go about adding a new Pokemon to the Pokedex?
+	- Each Pokemon will need to be inserted into the correct position in the BST
+	- Again, because a BST is a recursive data structure, a recursive algorithm can be used
+		- If the new value comes before value, insert the new value into the left subtree
+		- Otherwise, insert the new value into the right subtree
+		- Repeat this until an empty subtree is found. Create a new BinaryNode & add it to the tree
+
+- BST Complexity 
+	- Best case:
+		- Balanced tree - O(logN)
+	- Worst case:
+		- Totally unbalanced tree - O(N)
