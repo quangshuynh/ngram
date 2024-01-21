@@ -1,0 +1,82 @@
+- Trees
+	- A **general tree** is a **hierarchical** data structure that stores a set of elements in nodes with any number of children
+	- A binary tree is a tree where all nodes have 0, 1, or 2 children
+		- ![[Pasted image 20231129075536.png]]
+
+- Tree definitions
+	- Root: A
+	- B's parent: A
+	- A's children: {B,C}
+	- B's sibling: C
+	- Leaf nodes: {D, G, H, I}
+	- Interior nodes" {A, B, C, E, F}
+	- C's descendants: {C, E, F, G, H, I}
+	- G's ancestors: {G, E, C, A}
+	- Nodes in A's right subtree: {C, E, F, G, H, I}
+		- ![[Pasted image 20231129075735.png]]
+
+- Binary Tree Node
+	- ![[Pasted image 20231129075759.png]]
+
+- Tree Traversals
+	- A traversal is a process by which each node in a tree is visited exactly once
+		- Preorder: Parent, Left, Right
+		- Inorder: Left, Parent, Right
+		- Postorder: Left, Right, Parent
+
+- Tree Traversals: Implementation:
+	- ![[Pasted image 20231129075912.png]]
+
+- Binary Tree: Size
+	- ![[Pasted image 20231129080019.png]]
+
+- Binary Tree: Height
+	- ![[Pasted image 20231129080113.png]]
+
+- Binary Search Tree
+	- An ordered binary tree
+		- All nodes to the left must be less than the parent
+		- All nodes to the right must be greater than the parent
+			- ![[Pasted image 20231129080203.png]]
+
+- BST: Representation
+	- ![[Pasted image 20231129080240.png]]
+
+- BST: Insert
+	- ![[Pasted image 20231129080355.png]]
+
+- BST: To string
+	- to_str is an inorder traversing string builder
+		- ![[Pasted image 20231129080437.png]]
+
+- BST Performance
+	- The performance of inserting into a BST is based on how well-balanced the tree is
+		- Well-balanced tree: O(logN)
+		- Unbalanced tree: O(N)
+			- ![[Pasted image 20231129080546.png]]
+
+- Initial quiz
+1. 
+	- Preorder: F, B, A, D, C, E, G, I, H
+	- Inorder: A, B, C, D, E, F, G, H, I
+	- Postorder: A, C, E, D, B, H, I, G, F
+
+2. ![[Pasted image 20231129081742.png]]
+
+3. 
+	- a. ![[Pasted image 20231129081905.png]]
+	- b. 
+		- mystery(A)
+		- = 0 + mystery(B) + mystery(D)
+		- = 0 + (0 + mystery(C) + 1) + (0+ mystery(E) + 1)
+		- = 0 + (0 + 0 + 1) + (0 + 0 + 1)
+		- = 2
+	- c. This mystery function returns number of leaf nodes
+
+4. 
+	- a. O(N)
+	- b. ![[Pasted image 20231129083356.png]]
+
+5. 
+	- a. O(logN)
+	- ![[Pasted image 20231129084754.png]]
